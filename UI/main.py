@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'homepage.ui'
+# Form implementation generated from reading ui file 'opening.ui'
 #
 # Created by: PyQt5 UI code generator 5.13.1
 #
@@ -8,6 +8,56 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
+
+class Ui_DocAid(object):
+    def setupUi(self, DocAid):
+        DocAid.setObjectName("DocAid")
+        DocAid.resize(800, 600)
+        self.centralwidget = QtWidgets.QWidget(DocAid)
+        self.centralwidget.setObjectName("centralwidget")
+        self.label = QtWidgets.QLabel(self.centralwidget)
+        self.label.setGeometry(QtCore.QRect(370, 180, 65, 60))
+        self.label.setMaximumSize(QtCore.QSize(65, 60))
+        self.label.setText("")
+        self.label.setPixmap(QtGui.QPixmap("../venv/images/DeepinScreenshot_20190821152323-removebg-preview.png"))
+        self.label.setObjectName("label")
+        self.label_2 = QtWidgets.QLabel(self.centralwidget)
+        self.label_2.setGeometry(QtCore.QRect(262, 260, 293, 32))
+        self.label_2.setMaximumSize(QtCore.QSize(293, 32))
+        self.label_2.setObjectName("label_2")
+        self.label_3 = QtWidgets.QLabel(self.centralwidget)
+        self.label_3.setGeometry(QtCore.QRect(240, 300, 341, 24))
+        self.label_3.setMaximumSize(QtCore.QSize(341, 24))
+        self.label_3.setObjectName("label_3")
+        self.pushButton = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton.setGeometry(QtCore.QRect(370, 370, 89, 25))
+        self.pushButton.setObjectName("pushButton")
+        DocAid.setCentralWidget(self.centralwidget)
+
+        self.retranslateUi(DocAid)
+        QtCore.QMetaObject.connectSlotsByName(DocAid)
+
+    def retranslateUi(self, DocAid):
+        _translate = QtCore.QCoreApplication.translate
+        DocAid.setWindowTitle(_translate("DocAid", "MainWindow"))
+        self.label_2.setText(_translate("DocAid", "<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;\">WELCOME TO DOCAID</span></p></body></html>"))
+        self.label_3.setText(_translate("DocAid", "<html><head/><body><p><span style=\" font-size:16pt;\">Ask the patient to scan the QR code</span></p></body></html>"))
+        self.pushButton.setText(_translate("DocAid", "Next"))
+        # self.pushButton.clicked.connect(self.goHomepage)
+
+    def goHomepage(self):
+        # self.homepage= Ui_MainWindow()
+        # self.setWindowTitle("Homapage")
+        # self.setCentralWidget(self.Window)
+        # self.show()
+        # self.homepage.show()
+        Homepage = QtWidgets.QMainWindow()
+        ui = Ui_MainWindow()
+        ui.setupUi(Homepage)
+        # Homapage.show()
 
 
 class Ui_MainWindow(object):
@@ -68,12 +118,30 @@ class Ui_MainWindow(object):
         self.label_5.setText(_translate("MainWindow", "Gender: M"))
         self.pushButton.setText(_translate("MainWindow", "Start Listening"))
 
+class MainWindow(QMainWindow):
+    def __init__(self, parent=None):
+        super(MainWindow, self).__init__(parent)
+        self.docAid = Ui_DocAid()
+        self.homepage = Ui_MainWindow()
+        self.startUIWindow()
+
+    def startUIWindow(self):
+        self.docAid.setupUi(self)
+        self.docAid.pushButton.clicked.connect(self.goHomepage)
+        # self.uiToolTab.CPSBTN.clicked.connect(self.startUIWindow)
+        self.show()
+
+    def goHomepage(self):
+        self.homepage.setupUi(self)
+        # self.uiWindow.ToolsBTN.clicked.connect(self.startUIToolTab)
+        self.show()
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
+    w = MainWindow()
+    # DocAid = QtWidgets.QMainWindow()
+    # ui = Ui_DocAid()
+    # ui.setupUi(DocAid)
+    # DocAid.show()
     sys.exit(app.exec_())
