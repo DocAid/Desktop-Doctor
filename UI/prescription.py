@@ -10,19 +10,19 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_DocAid(object):
-    def setupUi(self, DocAid):
-        DocAid.setObjectName("DocAid")
-        DocAid.resize(793, 591)
-        DocAid.setAutoFillBackground(True)
-        DocAid.setStyleSheet("")
-        self.textBrowser = QtWidgets.QTextBrowser(DocAid)
+class Ui_Prescription(object):
+    def setupUi(self, Prescription):
+        Prescription.setObjectName("Prescription")
+        Prescription.resize(800, 600)
+        Prescription.setAutoFillBackground(True)
+        Prescription.setStyleSheet("")
+        self.textBrowser = QtWidgets.QTextBrowser(Prescription)
         self.textBrowser.setGeometry(QtCore.QRect(590, 400, 201, 121))
         self.textBrowser.setObjectName("textBrowser")
-        self.textBrowser_2 = QtWidgets.QTextBrowser(DocAid)
+        self.textBrowser_2 = QtWidgets.QTextBrowser(Prescription)
         self.textBrowser_2.setGeometry(QtCore.QRect(590, 120, 201, 271))
         self.textBrowser_2.setObjectName("textBrowser_2")
-        self.textBrowser_3 = QtWidgets.QTextBrowser(DocAid)
+        self.textBrowser_3 = QtWidgets.QTextBrowser(Prescription)
         self.textBrowser_3.setGeometry(QtCore.QRect(10, 120, 271, 111))
         self.textBrowser_3.viewport().setProperty("cursor", QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.textBrowser_3.setMouseTracking(True)
@@ -30,47 +30,47 @@ class Ui_DocAid(object):
         self.textBrowser_3.setAutoFillBackground(True)
         self.textBrowser_3.setStyleSheet("selection-background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(255, 255, 255, 255), stop:0.1 rgba(255, 255, 255, 255), stop:0.2 rgba(255, 176, 176, 167), stop:0.3 rgba(255, 151, 151, 92), stop:0.4 rgba(255, 125, 125, 51), stop:0.5 rgba(255, 76, 76, 205), stop:0.52 rgba(255, 76, 76, 205), stop:0.6 rgba(255, 180, 180, 84), stop:1 rgba(255, 255, 255, 0));")
         self.textBrowser_3.setObjectName("textBrowser_3")
-        self.textBrowser_4 = QtWidgets.QTextBrowser(DocAid)
+        self.textBrowser_4 = QtWidgets.QTextBrowser(Prescription)
         self.textBrowser_4.setGeometry(QtCore.QRect(300, 120, 271, 111))
         self.textBrowser_4.setObjectName("textBrowser_4")
-        self.textBrowser_5 = QtWidgets.QTextBrowser(DocAid)
+        self.textBrowser_5 = QtWidgets.QTextBrowser(Prescription)
         self.textBrowser_5.setGeometry(QtCore.QRect(10, 240, 271, 91))
         self.textBrowser_5.setObjectName("textBrowser_5")
-        self.textBrowser_6 = QtWidgets.QTextBrowser(DocAid)
+        self.textBrowser_6 = QtWidgets.QTextBrowser(Prescription)
         self.textBrowser_6.setGeometry(QtCore.QRect(300, 240, 271, 91))
         self.textBrowser_6.setObjectName("textBrowser_6")
-        self.textBrowser_7 = QtWidgets.QTextBrowser(DocAid)
+        self.textBrowser_7 = QtWidgets.QTextBrowser(Prescription)
         self.textBrowser_7.setGeometry(QtCore.QRect(10, 350, 271, 101))
         self.textBrowser_7.setObjectName("textBrowser_7")
-        self.textBrowser_8 = QtWidgets.QTextBrowser(DocAid)
+        self.textBrowser_8 = QtWidgets.QTextBrowser(Prescription)
         self.textBrowser_8.setGeometry(QtCore.QRect(300, 350, 271, 101))
         self.textBrowser_8.setObjectName("textBrowser_8")
-        self.textBrowser_9 = QtWidgets.QTextBrowser(DocAid)
+        self.textBrowser_9 = QtWidgets.QTextBrowser(Prescription)
         self.textBrowser_9.setGeometry(QtCore.QRect(10, 470, 271, 101))
         self.textBrowser_9.setObjectName("textBrowser_9")
-        self.textBrowser_10 = QtWidgets.QTextBrowser(DocAid)
+        self.textBrowser_10 = QtWidgets.QTextBrowser(Prescription)
         self.textBrowser_10.setGeometry(QtCore.QRect(300, 470, 271, 101))
         self.textBrowser_10.setObjectName("textBrowser_10")
-        self.textBrowser_11 = QtWidgets.QTextBrowser(DocAid)
+        self.textBrowser_11 = QtWidgets.QTextBrowser(Prescription)
         self.textBrowser_11.setGeometry(QtCore.QRect(-10, 0, 811, 71))
         self.textBrowser_11.setStyleSheet("background-color: rgb(43, 86, 190);")
         self.textBrowser_11.setObjectName("textBrowser_11")
-        self.label = QtWidgets.QLabel(DocAid)
+        self.label = QtWidgets.QLabel(Prescription)
         self.label.setGeometry(QtCore.QRect(20, 0, 71, 71))
         self.label.setText("")
         self.label.setPixmap(QtGui.QPixmap("../.designer/Downloads/DeepinScreenshot_20190821152323-removebg-preview.png"))
         self.label.setObjectName("label")
-        self.label_2 = QtWidgets.QLabel(DocAid)
+        self.label_2 = QtWidgets.QLabel(Prescription)
         self.label_2.setGeometry(QtCore.QRect(610, 130, 171, 181))
         self.label_2.setText("")
         self.label_2.setPixmap(QtGui.QPixmap("../venv/images/doctor-background-design_1270-62.png"))
         self.label_2.setObjectName("label_2")
-        self.label_3 = QtWidgets.QLabel(DocAid)
+        self.label_3 = QtWidgets.QLabel(Prescription)
         self.label_3.setGeometry(QtCore.QRect(20, 0, 71, 71))
         self.label_3.setText("")
         self.label_3.setPixmap(QtGui.QPixmap("../venv/images/DeepinScreenshot_20190821152323-removebg-preview.png"))
         self.label_3.setObjectName("label_3")
-        self.pushButton_9 = QtWidgets.QPushButton(DocAid)
+        self.pushButton_9 = QtWidgets.QPushButton(Prescription)
         self.pushButton_9.setGeometry(QtCore.QRect(620, 540, 161, 31))
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(43, 86, 190))
@@ -121,7 +121,7 @@ class Ui_DocAid(object):
         self.pushButton_9.setPalette(palette)
         self.pushButton_9.setStyleSheet("background-color: rgb(43, 86, 190);")
         self.pushButton_9.setObjectName("pushButton_9")
-        self.pushButton_11 = QtWidgets.QPushButton(DocAid)
+        self.pushButton_11 = QtWidgets.QPushButton(Prescription)
         self.pushButton_11.setGeometry(QtCore.QRect(120, 200, 141, 21))
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(43, 86, 190))
@@ -172,7 +172,7 @@ class Ui_DocAid(object):
         self.pushButton_11.setPalette(palette)
         self.pushButton_11.setStyleSheet("background-color: rgb(43, 86, 190);")
         self.pushButton_11.setObjectName("pushButton_11")
-        self.pushButton_12 = QtWidgets.QPushButton(DocAid)
+        self.pushButton_12 = QtWidgets.QPushButton(Prescription)
         self.pushButton_12.setGeometry(QtCore.QRect(410, 200, 141, 21))
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(43, 86, 190))
@@ -223,7 +223,7 @@ class Ui_DocAid(object):
         self.pushButton_12.setPalette(palette)
         self.pushButton_12.setStyleSheet("background-color: rgb(43, 86, 190);")
         self.pushButton_12.setObjectName("pushButton_12")
-        self.pushButton_13 = QtWidgets.QPushButton(DocAid)
+        self.pushButton_13 = QtWidgets.QPushButton(Prescription)
         self.pushButton_13.setGeometry(QtCore.QRect(120, 300, 141, 21))
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(43, 86, 190))
@@ -274,7 +274,7 @@ class Ui_DocAid(object):
         self.pushButton_13.setPalette(palette)
         self.pushButton_13.setStyleSheet("background-color: rgb(43, 86, 190);")
         self.pushButton_13.setObjectName("pushButton_13")
-        self.pushButton_14 = QtWidgets.QPushButton(DocAid)
+        self.pushButton_14 = QtWidgets.QPushButton(Prescription)
         self.pushButton_14.setGeometry(QtCore.QRect(410, 300, 141, 21))
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(43, 86, 190))
@@ -325,7 +325,7 @@ class Ui_DocAid(object):
         self.pushButton_14.setPalette(palette)
         self.pushButton_14.setStyleSheet("background-color: rgb(43, 86, 190);")
         self.pushButton_14.setObjectName("pushButton_14")
-        self.pushButton_15 = QtWidgets.QPushButton(DocAid)
+        self.pushButton_15 = QtWidgets.QPushButton(Prescription)
         self.pushButton_15.setGeometry(QtCore.QRect(120, 420, 141, 21))
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(43, 86, 190))
@@ -376,7 +376,7 @@ class Ui_DocAid(object):
         self.pushButton_15.setPalette(palette)
         self.pushButton_15.setStyleSheet("background-color: rgb(43, 86, 190);")
         self.pushButton_15.setObjectName("pushButton_15")
-        self.pushButton_16 = QtWidgets.QPushButton(DocAid)
+        self.pushButton_16 = QtWidgets.QPushButton(Prescription)
         self.pushButton_16.setGeometry(QtCore.QRect(410, 420, 141, 21))
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(43, 86, 190))
@@ -427,7 +427,7 @@ class Ui_DocAid(object):
         self.pushButton_16.setPalette(palette)
         self.pushButton_16.setStyleSheet("background-color: rgb(43, 86, 190);")
         self.pushButton_16.setObjectName("pushButton_16")
-        self.pushButton_17 = QtWidgets.QPushButton(DocAid)
+        self.pushButton_17 = QtWidgets.QPushButton(Prescription)
         self.pushButton_17.setGeometry(QtCore.QRect(120, 540, 141, 21))
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(43, 86, 190))
@@ -478,7 +478,7 @@ class Ui_DocAid(object):
         self.pushButton_17.setPalette(palette)
         self.pushButton_17.setStyleSheet("background-color: rgb(43, 86, 190);")
         self.pushButton_17.setObjectName("pushButton_17")
-        self.pushButton_18 = QtWidgets.QPushButton(DocAid)
+        self.pushButton_18 = QtWidgets.QPushButton(Prescription)
         self.pushButton_18.setGeometry(QtCore.QRect(410, 540, 141, 21))
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(43, 86, 190))
@@ -529,7 +529,7 @@ class Ui_DocAid(object):
         self.pushButton_18.setPalette(palette)
         self.pushButton_18.setStyleSheet("background-color: rgb(43, 86, 190);")
         self.pushButton_18.setObjectName("pushButton_18")
-        self.textEdit = QtWidgets.QTextEdit(DocAid)
+        self.textEdit = QtWidgets.QTextEdit(Prescription)
         self.textEdit.setGeometry(QtCore.QRect(520, 20, 251, 31))
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
@@ -625,51 +625,51 @@ class Ui_DocAid(object):
         self.textEdit.setPalette(palette)
         self.textEdit.setStyleSheet("background-color: rgb(43, 86, 190);")
         self.textEdit.setObjectName("textEdit")
-        self.label_4 = QtWidgets.QLabel(DocAid)
+        self.label_4 = QtWidgets.QLabel(Prescription)
         self.label_4.setGeometry(QtCore.QRect(740, 10, 9, 17))
         self.label_4.setText("")
         self.label_4.setPixmap(QtGui.QPixmap("../Downloads/24px.svg"))
         self.label_4.setObjectName("label_4")
-        self.checkBox = QtWidgets.QCheckBox(DocAid)
+        self.checkBox = QtWidgets.QCheckBox(Prescription)
         self.checkBox.setGeometry(QtCore.QRect(20, 80, 91, 21))
         self.checkBox.setObjectName("checkBox")
-        self.checkBox_2 = QtWidgets.QCheckBox(DocAid)
+        self.checkBox_2 = QtWidgets.QCheckBox(Prescription)
         self.checkBox_2.setGeometry(QtCore.QRect(90, 80, 81, 21))
         self.checkBox_2.setObjectName("checkBox_2")
-        self.checkBox_3 = QtWidgets.QCheckBox(DocAid)
+        self.checkBox_3 = QtWidgets.QCheckBox(Prescription)
         self.checkBox_3.setGeometry(QtCore.QRect(180, 80, 81, 21))
         self.checkBox_3.setObjectName("checkBox_3")
-        self.checkBox_4 = QtWidgets.QCheckBox(DocAid)
+        self.checkBox_4 = QtWidgets.QCheckBox(Prescription)
         self.checkBox_4.setGeometry(QtCore.QRect(250, 80, 71, 21))
         self.checkBox_4.setObjectName("checkBox_4")
-        self.checkBox_5 = QtWidgets.QCheckBox(DocAid)
+        self.checkBox_5 = QtWidgets.QCheckBox(Prescription)
         self.checkBox_5.setGeometry(QtCore.QRect(330, 80, 71, 21))
         self.checkBox_5.setObjectName("checkBox_5")
-        self.textEdit_2 = QtWidgets.QTextEdit(DocAid)
+        self.textEdit_2 = QtWidgets.QTextEdit(Prescription)
         self.textEdit_2.setGeometry(QtCore.QRect(590, 80, 201, 31))
         self.textEdit_2.setObjectName("textEdit_2")
-        self.label_5 = QtWidgets.QLabel(DocAid)
+        self.label_5 = QtWidgets.QLabel(Prescription)
         self.label_5.setGeometry(QtCore.QRect(760, 80, 31, 31))
         self.label_5.setText("")
         self.label_5.setPixmap(QtGui.QPixmap("../venv/images/search.svg"))
         self.label_5.setObjectName("label_5")
 
-        self.retranslateUi(DocAid)
-        QtCore.QMetaObject.connectSlotsByName(DocAid)
+        self.retranslateUi(Prescription)
+        QtCore.QMetaObject.connectSlotsByName(Prescription)
 
-    def retranslateUi(self, DocAid):
+    def retranslateUi(self, Prescription):
         _translate = QtCore.QCoreApplication.translate
-        DocAid.setWindowTitle(_translate("DocAid", "Dialog"))
-        DocAid.setAccessibleName(_translate("DocAid", "card1"))
-        DocAid.setAccessibleDescription(_translate("DocAid", "card1"))
-        self.textBrowser.setHtml(_translate("DocAid", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+        Prescription.setWindowTitle(_translate("Prescription", "Dialog"))
+        Prescription.setAccessibleName(_translate("Prescription", "card1"))
+        Prescription.setAccessibleDescription(_translate("Prescription", "card1"))
+        self.textBrowser.setHtml(_translate("Prescription", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'Ubuntu\'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'MS Shell Dlg 2\'; font-size:12pt;\">Paracetamol 500mg x5 tablets</span></p>\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'MS Shell Dlg 2\'; font-size:12pt;\"><br /></p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'MS Shell Dlg 2\'; font-size:12pt;\">Calpol 500mg x5 tablets</span></p></body></html>"))
-        self.textBrowser_2.setHtml(_translate("DocAid", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+        self.textBrowser_2.setHtml(_translate("Prescription", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'Ubuntu\'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
@@ -688,87 +688,87 @@ class Ui_DocAid(object):
 "<p align=\"center\" dir=\'rtl\' style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'MS Shell Dlg 2\'; font-size:10pt;\">Pramila Nair</span></p>\n"
 "<p align=\"center\" dir=\'rtl\' style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'MS Shell Dlg 2\'; font-size:10pt;\">City Hospital</span></p>\n"
 "<p align=\"center\" dir=\'rtl\' style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'MS Shell Dlg 2\'; font-size:10pt;\">MBBS, Neurologist</span></p></body></html>"))
-        self.textBrowser_3.setHtml(_translate("DocAid", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+        self.textBrowser_3.setHtml(_translate("Prescription", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'Ubuntu\'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'MS Shell Dlg 2\'; font-size:16pt; font-weight:600;\">Paracetamol 500mg</span><span style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt;\"> </span></p>\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'MS Shell Dlg 2\'; font-size:8.25pt;\"><br /></p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'MS Shell Dlg 2\'; font-size:8pt;\">1 tablet morning, noon &amp; after bed for 1<br />week </span></p></body></html>"))
-        self.textBrowser_4.setHtml(_translate("DocAid", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+        self.textBrowser_4.setHtml(_translate("Prescription", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'Ubuntu\'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'MS Shell Dlg 2\'; font-size:16pt; font-weight:600;\">Calpol 500mg</span><span style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt;\"> </span></p>\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'MS Shell Dlg 2\'; font-size:8.25pt;\"><br /></p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt;\">1-1-1</span></p></body></html>"))
-        self.textBrowser_5.setHtml(_translate("DocAid", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+        self.textBrowser_5.setHtml(_translate("Prescription", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'Ubuntu\'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'MS Shell Dlg 2\'; font-size:16pt; font-weight:600;\">Panadol 500mg</span><span style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt;\"> </span></p>\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'MS Shell Dlg 2\'; font-size:8.25pt;\"><br /></p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt;\">1-1-1</span></p></body></html>"))
-        self.textBrowser_6.setHtml(_translate("DocAid", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+        self.textBrowser_6.setHtml(_translate("Prescription", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'Ubuntu\'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'MS Shell Dlg 2\'; font-size:16pt; font-weight:600;\">Dolo 500mg</span><span style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt;\"> </span></p>\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'MS Shell Dlg 2\'; font-size:8.25pt;\"><br /></p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt;\">1-1-1</span></p></body></html>"))
-        self.textBrowser_7.setHtml(_translate("DocAid", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+        self.textBrowser_7.setHtml(_translate("Prescription", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'Ubuntu\'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'MS Shell Dlg 2\'; font-size:16pt; font-weight:600;\">Shelcal 500mg</span><span style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt;\"> </span></p>\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'MS Shell Dlg 2\'; font-size:8.25pt;\"><br /></p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt;\">1-1-1</span></p></body></html>"))
-        self.textBrowser_8.setHtml(_translate("DocAid", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+        self.textBrowser_8.setHtml(_translate("Prescription", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'Ubuntu\'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'MS Shell Dlg 2\'; font-size:16pt; font-weight:600;\">Rumex 500mg</span><span style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt;\"> </span></p>\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'MS Shell Dlg 2\'; font-size:8.25pt;\"><br /></p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt;\">1-1-1</span></p></body></html>"))
-        self.textBrowser_9.setHtml(_translate("DocAid", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+        self.textBrowser_9.setHtml(_translate("Prescription", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'Ubuntu\'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'MS Shell Dlg 2\'; font-size:16pt; font-weight:600;\">Ibuprofen 500mg</span><span style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt;\"> </span></p>\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'MS Shell Dlg 2\'; font-size:8.25pt;\"><br /></p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt;\">1-1-1</span></p></body></html>"))
-        self.textBrowser_10.setHtml(_translate("DocAid", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+        self.textBrowser_10.setHtml(_translate("Prescription", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'Ubuntu\'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'MS Shell Dlg 2\'; font-size:16pt; font-weight:600;\">Ibugesic 500mg</span><span style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt;\"> </span></p>\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'MS Shell Dlg 2\'; font-size:8.25pt;\"><br /></p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt;\">1-1-1</span></p></body></html>"))
-        self.textBrowser_11.setHtml(_translate("DocAid", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+        self.textBrowser_11.setHtml(_translate("Prescription", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'Ubuntu\'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'MS Shell Dlg 2\'; font-size:22pt; color:#ffffff;\">            </span><span style=\" font-family:\'MS Shell Dlg 2\'; font-size:22pt; font-weight:600; color:#ffffff;\">DocAid</span></p></body></html>"))
-        self.pushButton_9.setText(_translate("DocAid", "Generate Prescription"))
-        self.pushButton_11.setText(_translate("DocAid", "Add to Prescription"))
-        self.pushButton_12.setText(_translate("DocAid", "Add to Prescription"))
-        self.pushButton_13.setText(_translate("DocAid", "Add to Prescription"))
-        self.pushButton_14.setText(_translate("DocAid", "Add to Prescription"))
-        self.pushButton_15.setText(_translate("DocAid", "Add to Prescription"))
-        self.pushButton_16.setText(_translate("DocAid", "Add to Prescription"))
-        self.pushButton_17.setText(_translate("DocAid", "Add to Prescription"))
-        self.pushButton_18.setText(_translate("DocAid", "Add to Prescription"))
-        self.textEdit.setHtml(_translate("DocAid", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+        self.pushButton_9.setText(_translate("Prescription", "Generate Prescription"))
+        self.pushButton_11.setText(_translate("Prescription", "Add to Prescription"))
+        self.pushButton_12.setText(_translate("Prescription", "Add to Prescription"))
+        self.pushButton_13.setText(_translate("Prescription", "Add to Prescription"))
+        self.pushButton_14.setText(_translate("Prescription", "Add to Prescription"))
+        self.pushButton_15.setText(_translate("Prescription", "Add to Prescription"))
+        self.pushButton_16.setText(_translate("Prescription", "Add to Prescription"))
+        self.pushButton_17.setText(_translate("Prescription", "Add to Prescription"))
+        self.pushButton_18.setText(_translate("Prescription", "Add to Prescription"))
+        self.textEdit.setHtml(_translate("Prescription", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'Ubuntu\'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'MS Shell Dlg 2\'; font-size:10pt; color:#ffffff;\">Type in Symptom/Disease</span></p></body></html>"))
-        self.checkBox.setText(_translate("DocAid", "Fever"))
-        self.checkBox_2.setText(_translate("DocAid", "Weakness"))
-        self.checkBox_3.setText(_translate("DocAid", "Cough"))
-        self.checkBox_4.setText(_translate("DocAid", "Nausea"))
-        self.checkBox_5.setText(_translate("DocAid", "Diarrhoea"))
-        self.textEdit_2.setHtml(_translate("DocAid", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+        self.checkBox.setText(_translate("Prescription", "Fever"))
+        self.checkBox_2.setText(_translate("Prescription", "Weakness"))
+        self.checkBox_3.setText(_translate("Prescription", "Cough"))
+        self.checkBox_4.setText(_translate("Prescription", "Nausea"))
+        self.checkBox_5.setText(_translate("Prescription", "Diarrhoea"))
+        self.textEdit_2.setHtml(_translate("Prescription", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'Ubuntu\'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
@@ -778,8 +778,8 @@ class Ui_DocAid(object):
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    DocAid = QtWidgets.QDialog()
-    ui = Ui_DocAid()
-    ui.setupUi(DocAid)
-    DocAid.show()
+    Prescription = QtWidgets.QDialog()
+    ui = Ui_Prescription()
+    ui.setupUi(Prescription)
+    Prescription.show()
     sys.exit(app.exec_())

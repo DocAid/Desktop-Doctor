@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>DocAid</class>
- <widget class="QDialog" name="DocAid">
+ <class>Prescription</class>
+ <widget class="QDialog" name="Prescription">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>793</width>
-    <height>591</height>
+    <width>800</width>
+    <height>600</height>
    </rect>
   </property>
   <property name="windowTitle">
