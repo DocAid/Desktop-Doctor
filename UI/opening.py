@@ -23,13 +23,16 @@ class Ui_DocAid(object):
         self.label.setPixmap(QtGui.QPixmap("../venv/images/DeepinScreenshot_20190821152323-removebg-preview.png"))
         self.label.setObjectName("label")
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
-        self.label_2.setGeometry(QtCore.QRect(830, 450, 293, 32))
+        self.label_2.setGeometry(QtCore.QRect(832, 450, 293, 32))
         self.label_2.setMaximumSize(QtCore.QSize(293, 32))
         self.label_2.setObjectName("label_2")
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
         self.label_3.setGeometry(QtCore.QRect(810, 490, 341, 24))
         self.label_3.setMaximumSize(QtCore.QSize(341, 24))
         self.label_3.setObjectName("label_3")
+        self.pushButton = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton.setGeometry(QtCore.QRect(940, 560, 89, 25))
+        self.pushButton.setObjectName("pushButton")
         DocAid.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(DocAid)
@@ -40,6 +43,7 @@ class Ui_DocAid(object):
         DocAid.setWindowTitle(_translate("DocAid", "MainWindow"))
         self.label_2.setText(_translate("DocAid", "<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;\">WELCOME TO DOCAID</span></p></body></html>"))
         self.label_3.setText(_translate("DocAid", "<html><head/><body><p><span style=\" font-size:16pt;\">Ask the patient to scan the QR code</span></p></body></html>"))
+        self.pushButton.setText(_translate("DocAid", "Next"))
 
 
 if __name__ == "__main__":
