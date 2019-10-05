@@ -775,11 +775,11 @@ class Ui_DocAid(object):
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'MS Shell Dlg 2\'; font-size:10pt; color:#2b56be;\">Search Medicine</span></p></body></html>"))
 
 
-if __name__ == "__main__":
+async def mainFunc():
     import sys
     app = QtWidgets.QApplication(sys.argv)
     DocAid = QtWidgets.QDialog()
     ui = Ui_DocAid()
     ui.setupUi(DocAid)
     DocAid.show()
-    sys.exit(app.exec_())
+    await sys.exit(app.exec_())
