@@ -2,11 +2,13 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
-import requests
+import requests 
 from opening import Ui_DocAid
 from homepage import Ui_MainWindow
 from prescription import Ui_Prescription
 from report import Ui_Report
+import json
+
 
 class MainWindow(QMainWindow):
     def __init__(self, parent=None):
@@ -24,6 +26,11 @@ class MainWindow(QMainWindow):
 
     def goHomepage(self):
         self.homepage.setupUi(self)
+        details=requests.get('https://uinames.com/api/?amount=1')
+        details=json.loads(details.text)
+        print(details["name"])
+        self.homepage.label_4.setText(details["name"]+details["surname"])
+        self.homepage.label_5.setText(details["gender"])
         self.homepage.pushButton.clicked.connect(self.goPrescription)
         self.show()
     
