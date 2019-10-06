@@ -10,11 +10,11 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_MainWindow(object):
-    def setupUi(self, MainWindow):
-        MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(800, 600)
-        self.centralwidget = QtWidgets.QWidget(MainWindow)
+class Ui_Report(object):
+    def setupUi(self, Report):
+        Report.setObjectName("Report")
+        Report.resize(800, 600)
+        self.centralwidget = QtWidgets.QWidget(Report)
         self.centralwidget.setObjectName("centralwidget")
         self.widget = QtWidgets.QWidget(self.centralwidget)
         self.widget.setGeometry(QtCore.QRect(0, 0, 800, 71))
@@ -69,29 +69,29 @@ class Ui_MainWindow(object):
         self.pushButton.setGeometry(QtCore.QRect(640, 360, 121, 31))
         self.pushButton.setStyleSheet("background-color:rgb(43, 86, 190)")
         self.pushButton.setObjectName("pushButton")
-        MainWindow.setCentralWidget(self.centralwidget)
+        Report.setCentralWidget(self.centralwidget)
 
-        self.retranslateUi(MainWindow)
-        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        self.retranslateUi(Report)
+        QtCore.QMetaObject.connectSlotsByName(Report)
 
-    def retranslateUi(self, MainWindow):
+    def retranslateUi(self, Report):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.label_2.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:22pt; font-weight:600; color:#ffffff;\">DocAid</span></p></body></html>"))
-        self.label_4.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:20pt;\">Rohit Nagraj</span></p></body></html>"))
-        self.label_5.setText(_translate("MainWindow", "Gender: M"))
-        self.label_6.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:18pt; color:#ffffff;\">Prescription for Fever</span></p></body></html>"))
-        self.label_7.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:10pt; color:#ffffff;\">Visited on 3 Oct</span></p></body></html>"))
-        self.label_8.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:14pt; font-weight:600;\">Paracetamol 500 mg</span></p></body></html>"))
-        self.label_9.setText(_translate("MainWindow", "2 tablets thrice a day for a week"))
-        self.pushButton.setText(_translate("MainWindow", "Generate PDF"))
+        Report.setWindowTitle(_translate("Report", "MainWindow"))
+        self.label_2.setText(_translate("Report", "<html><head/><body><p><span style=\" font-size:22pt; font-weight:600; color:#ffffff;\">DocAid</span></p></body></html>"))
+        self.label_4.setText(_translate("Report", "<html><head/><body><p><span style=\" font-size:20pt;\">Rohit Nagraj</span></p></body></html>"))
+        self.label_5.setText(_translate("Report", "Gender: M"))
+        self.label_6.setText(_translate("Report", "<html><head/><body><p><span style=\" font-size:18pt; color:#ffffff;\">Prescription for Fever</span></p></body></html>"))
+        self.label_7.setText(_translate("Report", "<html><head/><body><p><span style=\" font-size:10pt; color:#ffffff;\">Visited on 3 Oct</span></p></body></html>"))
+        self.label_8.setText(_translate("Report", "<html><head/><body><p><span style=\" font-size:14pt; font-weight:600;\">Paracetamol 500 mg</span></p></body></html>"))
+        self.label_9.setText(_translate("Report", "2 tablets thrice a day for a week"))
+        self.pushButton.setText(_translate("Report", "Generate PDF"))
 
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
+    Report = QtWidgets.QMainWindow()
+    ui = Ui_Report()
+    ui.setupUi(Report)
+    Report.show()
     sys.exit(app.exec_())
