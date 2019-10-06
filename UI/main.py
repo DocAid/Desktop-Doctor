@@ -31,11 +31,16 @@ class MainWindow(QMainWindow):
         print(details["name"])
         self.homepage.label_4.setText(details["name"]+details["surname"])
         self.homepage.label_5.setText(details["gender"])
-        self.homepage.pushButton.clicked.connect(self.goPrescription)
+        self.homepage.pushButton.clicked.connect(self.goReport)
         self.show()
     
-    def goPrescription(self):
+    def goReport(self):
         self.report.setupUi(self)
+        details=requests.get('https://uinames.com/api/?amount=1')
+        details=json.loads(details.text)
+        print(details["name"])
+        self.report.label_4.setText(details["name"]+details["surname"])
+        self.report.label_5.setText(details["gender"])
         # self.homepage.pushButton.setText("Clicked")
         # self.prescription.setupUi(self)
         self.show()
