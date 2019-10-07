@@ -28,11 +28,14 @@ class MainWindow(QMainWindow):
         self.show()
 
     def goHomepage(self):
-        # self.docAid.pushButton.setText("Loading")
-        self.homepage.setupUi(self)
+        self.docAid.pushButton.setText("Loading")
+        self.docAid.pushButton.setIcon(QIcon("./images/ajax-loader.gif"))
+        QtWidgets.qApp.processEvents()
         details=requests.get('https://uinames.com/api/?amount=1')
         details=json.loads(details.text)
-        print(details["name"])
+        print(details["name"], ' ',details["surname"])
+        self.homepage.setupUi(self)
+        self.homepage.label_4.setFont(QtGui.QFont("Times", 15, QtGui.QFont.Bold))
         self.homepage.label_4.setText(details["name"]+details["surname"])
         self.homepage.label_5.setText(details["gender"])
         self.homepage.pushButton.clicked.connect(self.goPrescription)
