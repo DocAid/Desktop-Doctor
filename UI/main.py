@@ -9,6 +9,9 @@ from prescription import Ui_Prescription
 from report import Ui_Report
 import json
 
+QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling, True)
+QApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True)
+
 
 class MainWindow(QMainWindow):
     def __init__(self, parent=None):
@@ -25,6 +28,7 @@ class MainWindow(QMainWindow):
         self.show()
 
     def goHomepage(self):
+        # self.docAid.pushButton.setText("Loading")
         self.homepage.setupUi(self)
         details=requests.get('https://uinames.com/api/?amount=1')
         details=json.loads(details.text)
