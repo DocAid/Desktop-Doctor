@@ -175,9 +175,6 @@ class MainWindow(QMainWindow):
         self.show()
     
     def goPrescription(self):
-        # self.prescription.setupUi(self)
-        # self.prescription.pushButton_9.clicked.connect(self.goReport)
-        # self.show()
         language_code = 'en-US'  # a BCP-47 language tag
 
         client = speech.SpeechClient()
@@ -198,6 +195,9 @@ class MainWindow(QMainWindow):
 
             # Now, put the transcription responses to use.
             listen_print_loop(responses)
+        self.prescription.setupUi(self)
+        self.prescription.pushButton_9.clicked.connect(self.goReport)
+        self.show()
 
         
 
