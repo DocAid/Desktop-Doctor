@@ -12,12 +12,16 @@ from homepage import Ui_MainWindow
 from prescription import Ui_Prescription
 from report import Ui_Report
 import json
+import random
+
 
 from google.cloud import speech
 from google.cloud.speech import enums
 from google.cloud.speech import types
 import pyaudio
 from six.moves import queue
+from textblob import TextBlob, Word
+
 
 # Audio recording parameters
 RATE = 16000
@@ -91,6 +95,7 @@ class MicrophoneStream(object):
 
 
 def listen_print_loop(responses):
+    string=""
     """Iterates through server responses and prints them.
 
     The responses passed is a generator that will block until a response
@@ -135,12 +140,14 @@ def listen_print_loop(responses):
 
         else:
             print(transcript + overwrite_chars)
-
+            string += transcript+overwrite_chars
             # Exit recognition if any of the transcribed phrases could be
             # one of our keywords.
             if re.search(r'\b(exit|quit)\b', transcript, re.I):
+                print(string)
                 print('Exiting..')
-                break
+                return string
+                # break
 
             num_chars_printed = 0
 
@@ -175,6 +182,7 @@ class MainWindow(QMainWindow):
         self.show()
     
     def goPrescription(self):
+        string=""
         language_code = 'en-US'  # a BCP-47 language tag
 
         client = speech.SpeechClient()
@@ -194,7 +202,23 @@ class MainWindow(QMainWindow):
             responses = client.streaming_recognize(streaming_config, requests)
 
             # Now, put the transcription responses to use.
-            listen_print_loop(responses)
+            string=listen_print_loop(responses)
+        print(string)
+        blob = TextBlob(string)
+        number_of_tokens = len(list(blob.words))
+        # Extracting Main Points
+        nouns = list()
+        for word, tag in blob.tags:
+            if tag == 'NN':
+                nouns.append(word.lemmatize())
+                len_of_words = len(nouns)
+                rand_words = random.sample(nouns, len(nouns))
+                final_word = list()
+                for item in rand_words:
+                    word = Word(item).pluralize()
+                    final_word.append(word)
+                    summary = final_word
+        print(summary)
         self.prescription.setupUi(self)
         self.prescription.pushButton_9.clicked.connect(self.goReport)
         self.show()
