@@ -184,7 +184,7 @@ class MainWindow(QMainWindow):
     
     def goPrescription(self):
         self.homepage.pushButton.setText("Listening")
-        self.homepage.pushButton.setIcon(QIcon("./images/ajax-loader.gif"))
+        self.homepage.pushButton.setIcon(QIcon("./images/blue-loader.gif"))
         QtWidgets.qApp.processEvents()
         string=""
         language_code = 'en-US'  # a BCP-47 language tag
