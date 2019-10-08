@@ -183,6 +183,9 @@ class MainWindow(QMainWindow):
         self.show()
     
     def goPrescription(self):
+        self.homepage.pushButton.setText("Listening")
+        self.homepage.pushButton.setIcon(QIcon("./images/ajax-loader.gif"))
+        QtWidgets.qApp.processEvents()
         string=""
         language_code = 'en-US'  # a BCP-47 language tag
 
@@ -222,8 +225,8 @@ class MainWindow(QMainWindow):
         # print(summary)
         print(feature_search(string))
         data1 = feature_search(string)
-        r=req.post("http://ca2f4a2b.ngrok.io/prediction",json={"val":data1})
-        print(r.json())
+        # r=req.post("http://ca2f4a2b.ngrok.io/prediction",json={"val":data1})
+        # print(r.json())
         self.prescription.setupUi(self)
         self.prescription.pushButton_9.clicked.connect(self.goReport)
         self.show()
