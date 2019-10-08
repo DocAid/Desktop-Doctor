@@ -6,15 +6,16 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
-import requests 
+import requests as req
 from opening import Ui_DocAid
 from homepage import Ui_MainWindow
 from prescription import Ui_Prescription
 from report import Ui_Report
 import json
+
 import random
 
-
+from keyword_search import feature_search
 from google.cloud import speech
 from google.cloud.speech import enums
 from google.cloud.speech import types
@@ -171,7 +172,7 @@ class MainWindow(QMainWindow):
         self.docAid.pushButton.setText("Loading")
         self.docAid.pushButton.setIcon(QIcon("./images/ajax-loader.gif"))
         QtWidgets.qApp.processEvents()
-        details=requests.get('https://uinames.com/api/?amount=1')
+        details=req.get('https://uinames.com/api/?amount=1')
         details=json.loads(details.text)
         print(details["name"], ' ',details["surname"])
         self.homepage.setupUi(self)
@@ -204,21 +205,25 @@ class MainWindow(QMainWindow):
             # Now, put the transcription responses to use.
             string=listen_print_loop(responses)
         print(string)
-        blob = TextBlob(string)
-        number_of_tokens = len(list(blob.words))
-        # Extracting Main Points
-        nouns = list()
-        for word, tag in blob.tags:
-            if tag == 'NN':
-                nouns.append(word.lemmatize())
-                len_of_words = len(nouns)
-                rand_words = random.sample(nouns, len(nouns))
-                final_word = list()
-                for item in rand_words:
-                    word = Word(item).pluralize()
-                    final_word.append(word)
-                    summary = final_word
-        print(summary)
+        # blob = TextBlob(string)
+        # number_of_tokens = len(list(blob.words))
+        # # Extracting Main Points
+        # nouns = list()
+        # for word, tag in blob.tags:
+        #     if tag == 'NN':
+        #         nouns.append(word.lemmatize())
+        #         len_of_words = len(nouns)
+        #         rand_words = random.sample(nouns, len(nouns))
+        #         final_word = list()
+        #         for item in rand_words:
+        #             word = Word(item).pluralize()
+        #             final_word.append(word)
+        #             summary = final_word
+        # print(summary)
+        print(feature_search(string))
+        data1 = feature_search(string)
+        r=req.post("http://ca2f4a2b.ngrok.io/prediction",json={"val":data1})
+        print(r.json())
         self.prescription.setupUi(self)
         self.prescription.pushButton_9.clicked.connect(self.goReport)
         self.show()
@@ -227,7 +232,7 @@ class MainWindow(QMainWindow):
 
     def goReport(self):
         self.report.setupUi(self)
-        details=requests.get('https://uinames.com/api/?amount=1')
+        details=req.get('https://uinames.com/api/?amount=1')
         details=json.loads(details.text)
         print(details["name"])
         self.report.label_4.setText(details["name"]+details["surname"])
