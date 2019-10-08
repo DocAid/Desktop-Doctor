@@ -31,7 +31,8 @@ class Ui_DocAid(object):
         self.label_3.setMaximumSize(QtCore.QSize(341, 24))
         self.label_3.setObjectName("label_3")
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton.setGeometry(QtCore.QRect(570, 390, 89, 25))
+        self.pushButton.setGeometry(QtCore.QRect(520, 370, 171, 41))
+        self.pushButton.setStyleSheet("background-color:rgb(43, 86, 190)")
         self.pushButton.setObjectName("pushButton")
         DocAid.setCentralWidget(self.centralwidget)
 
@@ -43,7 +44,7 @@ class Ui_DocAid(object):
         DocAid.setWindowTitle(_translate("DocAid", "MainWindow"))
         self.label_2.setText(_translate("DocAid", "<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;\">WELCOME TO DOCAID</span></p></body></html>"))
         self.label_3.setText(_translate("DocAid", "<html><head/><body><p><span style=\" font-size:16pt;\">Ask the patient to scan the QR code</span></p></body></html>"))
-        self.pushButton.setText(_translate("DocAid", "Next"))
+        self.pushButton.setText(_translate("DocAid", "Scan the QR"))
 
 
 if __name__ == "__main__":

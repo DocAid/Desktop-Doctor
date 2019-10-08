@@ -14,6 +14,8 @@ from report import Ui_Report
 import json
 
 import random
+import time
+import socket
 
 from keyword_search import feature_search
 from google.cloud import speech
@@ -163,15 +165,39 @@ class MainWindow(QMainWindow):
         self.report=Ui_Report()
         self.startUIWindow()
 
+    def QR_check(self):
+        host = socket.gethostname()
+        port = 5500
+        client = socket.socket()
+        client.connect((host, port))
+
+        while True:
+            client.send("Hello".encode())
+            data = client.recv(2048).decode()
+            print("TEST")
+            if data:
+                 print(data)
+                 client.close()
+                 break
+        return data
+
     def startUIWindow(self):
         self.docAid.setupUi(self)
         self.docAid.pushButton.clicked.connect(self.goHomepage)
+        # self.goHomepage()
+       
+        
         self.show()
 
+
     def goHomepage(self):
-        self.docAid.pushButton.setText("Loading")
-        self.docAid.pushButton.setIcon(QIcon("./images/ajax-loader.gif"))
+        self.docAid.pushButton.setText("Waiting for scan")
+        self.docAid.pushButton.setIcon(QIcon("./images/blue-loader.gif"))
         QtWidgets.qApp.processEvents()
+        data=self.QR_check()
+        print(data)
+        # self.docAid.pushButton.setIcon(QIcon("./images/ajax-loader.gif"))
+        # QtWidgets.qApp.processEvents()
         details=req.get('https://uinames.com/api/?amount=1')
         details=json.loads(details.text)
         print(details["name"], ' ',details["surname"])
@@ -225,9 +251,43 @@ class MainWindow(QMainWindow):
         # print(summary)
         print(feature_search(string))
         data1 = feature_search(string)
-        # r=req.post("http://ca2f4a2b.ngrok.io/prediction",json={"val":data1})
-        # print(r.json())
+        r=req.post("http://3dd56d51.ngrok.io/prediction",json={"val":data1})
+        med=r.json()['Alergy'][1]
+        for key in med.keys():
+            print(key,med[key][-1])
         self.prescription.setupUi(self)
+
+        arr = ['paracetamol','jher kahle','marja patient','see you soon','depression']
+        arr2 = ['500mg','400mg','400mg','200mg','100mg']
+
+        i=-1
+        for key in med.keys():
+            i=i+1
+            self.prescription.textBrowser_3 = QtWidgets.QTextBrowser(self.prescription.centralwidget)
+            self.prescription.label = QtWidgets.QLabel(self.prescription.centralwidget)
+            if(i%2==0):
+                self.prescription.textBrowser_3.setGeometry(QtCore.QRect(40, 160+((i/2)*220), 381,161))
+                self.prescription.label.setGeometry(QtCore.QRect(40, 160+((i/2)*220), 381,161))
+            else:
+                self.prescription.textBrowser_3.setGeometry(QtCore.QRect(480, 160+(int(i/2)*220), 381,161))
+                self.prescription.label.setGeometry(QtCore.QRect(480, 160+(int(i/2)*220), 381,161))
+            self.prescription.textBrowser_3.viewport().setProperty("cursor", QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+            self.prescription.textBrowser_3.setMouseTracking(True)
+            self.prescription.textBrowser_3.setTabletTracking(True)
+            self.prescription.textBrowser_3.setAutoFillBackground(True)
+            self.prescription.textBrowser_3.setStyleSheet("selection-background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(255, 255, 255, 255), stop:0.1 rgba(255, 255, 255, 255), stop:0.2 rgba(255, 176, 176, 167), stop:0.3 rgba(255, 151, 151, 92), stop:0.4 rgba(255, 125, 125, 51), stop:0.5 rgba(255, 76, 76, 205), stop:0.52 rgba(255, 76, 76, 205), stop:0.6 rgba(255, 180, 180, 84), stop:1 rgba(255, 255, 255, 0));")
+            self.prescription.textBrowser_3.setObjectName("textBrowser_"+str(i))
+            self.prescription.label.setText(key+"  "+str(med[key][-1]))
+    #         self.prescription.textBrowser_3.setHtml("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+    # "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+    # "p, li { white-space: pre-wrap; }\n"
+    # "</style></head>{% block body %}style=\" font-family:\'Ubuntu\'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
+    # "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt;\"> </span></p>\n"
+    # "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'MS Shell Dlg 2\'; font-size:8.25pt;\"><br /></p>\n"
+    # "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'MS Shell Dlg 2\'; font-size:8pt;\">1 tablet morning, noon &amp; after bed for 1<br />week </span></p><button>Raghav</button>{% endblock %}</html>")
+            
+        QtWidgets.qApp.processEvents()
+        # self.prescription.setupUi(self)
         self.prescription.pushButton_9.clicked.connect(self.goReport)
         self.show()
 
