@@ -5,7 +5,7 @@ from PyQt5.QtWidgets import *
 import requests 
 from opening import Ui_DocAid
 from homepage import Ui_MainWindow
-from prescription import Ui_Prescription
+from waste import Ui_Prescription
 from report import Ui_Report
 import json
 

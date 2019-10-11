@@ -9,9 +9,11 @@ from PyQt5.QtWidgets import *
 import requests as req
 from opening import Ui_DocAid
 from homepage import Ui_MainWindow
-from prescription import Ui_Prescription
+from waste import Ui_Prescription
 from report import Ui_Report
 import json
+from flask import jsonify
+from datetime import date
 
 import random
 import time
@@ -162,6 +164,8 @@ class MainWindow(QMainWindow):
         self.docAid = Ui_DocAid()
         self.homepage = Ui_MainWindow()
         self.prescription=Ui_Prescription()
+        self.prescribed=set()
+        self.patient={}
         self.report=Ui_Report()
         self.startUIWindow()
 
@@ -194,45 +198,115 @@ class MainWindow(QMainWindow):
         self.docAid.pushButton.setText("Waiting for scan")
         self.docAid.pushButton.setIcon(QIcon("./images/blue-loader.gif"))
         QtWidgets.qApp.processEvents()
-        data=self.QR_check()
-        print(data)
+        # data=self.QR_check()
+        # print(data)
+        data="POC0012"
+        params1 = {
+            "pid":data
+        }
+        # data=jsonify(params1)
+        # print(data)
         # self.docAid.pushButton.setIcon(QIcon("./images/ajax-loader.gif"))
         # QtWidgets.qApp.processEvents()
-        details=req.get('https://uinames.com/api/?amount=1')
+        details=req.get(url='http://34.93.231.96:5000/patient_details', json=params1)
+        print(details.text)
         details=json.loads(details.text)
-        print(details["name"], ' ',details["surname"])
+        self.patient=details
+        # print(details["name"], ' ',details["surname"])
         self.homepage.setupUi(self)
         self.homepage.label_4.setFont(QtGui.QFont("Times", 15, QtGui.QFont.Bold))
-        self.homepage.label_4.setText(details["name"]+details["surname"])
+        self.homepage.label_4.setText(details["pid"])
+        self.homepage.label_5 = QtWidgets.QLabel(self.homepage.widget_2)
+        self.homepage.label_5.setGeometry(QtCore.QRect(50,240, 250,17))
+        self.homepage.label_5.setObjectName("age")
+        self.homepage.label_5.setText(details["age"])
+        self.homepage.label_5 = QtWidgets.QLabel(self.homepage.widget_2)
+        self.homepage.label_5.setGeometry(QtCore.QRect(50,260, 250,17))
+        self.homepage.label_5.setObjectName("gender")
         self.homepage.label_5.setText(details["gender"])
+        self.homepage.label_5 = QtWidgets.QLabel(self.homepage.widget_2)
+        self.homepage.label_5.setGeometry(QtCore.QRect(50,280, 250,17))
+        self.homepage.label_5.setObjectName("BMI")
+        self.homepage.label_5.setText(details["BMI"])
+        self.homepage.label_5 = QtWidgets.QLabel(self.homepage.widget_2)
+        self.homepage.label_5.setGeometry(QtCore.QRect(50,300, 250,17))
+        self.homepage.label_5.setObjectName("address")
+        self.homepage.label_5.setText(details["address"])
+        self.homepage.label_5 = QtWidgets.QLabel(self.homepage.widget_2)
+        self.homepage.label_5.setGeometry(QtCore.QRect(50,320, 250,17))
+        self.homepage.label_5.setObjectName("phone")
+        self.homepage.label_5.setText(details["phone"])
+        history=req.get("http://34.93.231.96:5000/diagonized_medicines", json=params1)
+        # history=json.loads(history.json())
+        # print(history.json())
+        # print(type(history.text))
+        # print(history.text.values())
+        arr=[]
+        history=history.json()
+        # print(history)
+        for a in history.keys():
+            arr.append({'date':a,'medicine':history[a]['medicines']})
+        print(arr)
+        for dosage in arr[::-1]:
+            print(dosage)
+            self.homepage.textBrowser_2 = QtWidgets.QTextBrowser(self.homepage.scrollAreaWidgetContents)
+            self.homepage.textBrowser_2.setObjectName("textBrowser_2")
+            self.homepage.verticalLayout_2.addWidget(self.homepage.textBrowser_2)
+            str="Visited on "+dosage['date'][0:8]+"\n\n"
+            # cursor=self.homepage.textBrowser_2.textCursor()
+            # cursor.insertHtml('''<p>{}</p><p>{}</p>'''.format("hello","world"))
+            # cursor.insertHtml('''<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">{}</p>'''.format(dosage['date'][0:8]+"\n"))
+            for i in dosage['medicine']:
+                str=str+"\t"+i['name']+"  "+i['dosage']+" mg"+"\n"
+                # cursor.insertHtml('''<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">{}</p>'''.format(i['dosage']+i['name']))
+            self.homepage.textBrowser_2.setText(str)
+            self.homepage.textBrowser_2.setStyleSheet("font-size:25px")
         self.homepage.pushButton.clicked.connect(self.goPrescription)
         self.show()
     
+
+    def work(self,_str,_str2):
+        def calling():
+          self.prescribed.add(_str+"  "+_str2)
+          print(self.prescribed)
+          str=""
+          for a in self.prescribed:
+              str=str+"\n"+a+" mg"
+          print(str)
+          self.prescription.label_5.setText(str)
+        #   self.prescription.label_10 = QtWidgets.QLabel(self.prescription.centralwidget)
+        #   self.prescription.label_10.setGeometry(QtCore.QRect(980,370+(20*(len(self.prescribed)-1)),210,20))
+        # #   self.prescription.label_10.setMaximumSize(QtCore.QSize(293, 32))
+        #   self.prescription.label_10.setObjectName("label_10")
+        #   self.prescription.label_10.setText(_str+"  "+_str2)
+          QtWidgets.qApp.processEvents()
+        return calling
+
     def goPrescription(self):
         self.homepage.pushButton.setText("Listening")
         self.homepage.pushButton.setIcon(QIcon("./images/blue-loader.gif"))
         QtWidgets.qApp.processEvents()
         string=""
-        language_code = 'en-US'  # a BCP-47 language tag
+        # language_code = 'en-US'  # a BCP-47 language tag
 
-        client = speech.SpeechClient()
-        config = types.RecognitionConfig(
-            encoding=enums.RecognitionConfig.AudioEncoding.LINEAR16,
-            sample_rate_hertz=RATE,
-            language_code=language_code)
-        streaming_config = types.StreamingRecognitionConfig(
-            config=config,
-            interim_results=True)
+        # client = speech.SpeechClient()
+        # config = types.RecognitionConfig(
+        #     encoding=enums.RecognitionConfig.AudioEncoding.LINEAR16,
+        #     sample_rate_hertz=RATE,
+        #     language_code=language_code)
+        # streaming_config = types.StreamingRecognitionConfig(
+        #     config=config,
+        #     interim_results=True)
 
-        with MicrophoneStream(RATE, CHUNK) as stream:
-            audio_generator = stream.generator()
-            requests = (types.StreamingRecognizeRequest(audio_content=content)
-                        for content in audio_generator)
+        # with MicrophoneStream(RATE, CHUNK) as stream:
+        #     audio_generator = stream.generator()
+        #     requests = (types.StreamingRecognizeRequest(audio_content=content)
+        #                 for content in audio_generator)
 
-            responses = client.streaming_recognize(streaming_config, requests)
+        #     responses = client.streaming_recognize(streaming_config, requests)
 
-            # Now, put the transcription responses to use.
-            string=listen_print_loop(responses)
+        #     # Now, put the transcription responses to use.
+        #     string=listen_print_loop(responses)
         print(string)
         # blob = TextBlob(string)
         # number_of_tokens = len(list(blob.words))
@@ -251,41 +325,49 @@ class MainWindow(QMainWindow):
         # print(summary)
         print(feature_search(string))
         data1 = feature_search(string)
-        r=req.post("http://3dd56d51.ngrok.io/prediction",json={"val":data1})
-        med=r.json()['Alergy'][1]
-        for key in med.keys():
-            print(key,med[key][-1])
-        self.prescription.setupUi(self)
-
-        arr = ['paracetamol','jher kahle','marja patient','see you soon','depression']
-        arr2 = ['500mg','400mg','400mg','200mg','100mg']
-
+        data=[1,0,0,1,0,1,0,0,0,1]
+        # r=req.post("http://a74611e4.ngrok.io/prediction",json={"val":data})
+        data1=[{'Dengue': [1, {'Acetaminophen': [1, 1, 1, 650, 1, 0, 1, 7, 1], 'Aspirin': [2, 1, 1, 500, 0, 0, 1, 3, 1], 'Ostoshine': [5, 1, 1, 6000, 0, 1, 0, 4, 1], 'Platimax': [3, 1, 0, 500, 0, 1, 1, 3, 1], 'Qubinor': [4, 1, 1, 600, 0, 1, 0, 4, 1]}]}, ['skin_rash', 'fatigue', 'loss_of_appetite', 'muscle_pain']]
+        # print(r.json())
+        # data1=r.json()
+        # medicines=[r.json()[key][1] if key not 'symptoms' in for key in r.json().keys]
+        for a in data1[0].keys():
+            medicines=data1[0][a][1]
+        print(medicines)
+        symptoms=data1[1]
+        print(symptoms)
         i=-1
-        for key in med.keys():
+        self.prescription.setupUi(self)
+        for x in symptoms:
             i=i+1
-            self.prescription.textBrowser_3 = QtWidgets.QTextBrowser(self.prescription.centralwidget)
-            self.prescription.label = QtWidgets.QLabel(self.prescription.centralwidget)
-            if(i%2==0):
-                self.prescription.textBrowser_3.setGeometry(QtCore.QRect(40, 160+((i/2)*220), 381,161))
-                self.prescription.label.setGeometry(QtCore.QRect(40, 160+((i/2)*220), 381,161))
-            else:
-                self.prescription.textBrowser_3.setGeometry(QtCore.QRect(480, 160+(int(i/2)*220), 381,161))
-                self.prescription.label.setGeometry(QtCore.QRect(480, 160+(int(i/2)*220), 381,161))
+            self.prescription.checkBox = QtWidgets.QCheckBox(self.prescription.centralwidget)
+            self.prescription.checkBox.setGeometry(QtCore.QRect(40+(i*70), 100, 91, 21))
+            self.prescription.checkBox.setObjectName("checkBox"+str(i))
+            self.prescription.checkBox.setText(x)
+        # med={"Calpol":[1,0,1,500], "Paracetamol":[0,1,4,0],"Calpol4":[1,0,1,500], "Paracetam4ol":[0,1,4,0],"C4alpol":[1,0,1,500], "Paracetamo4l":[0,1,4,0],"Ca44lpol":[1,0,1,500], "Paracetamo44l":[0,1,4,0],"Calpol444":[1,0,1,500], "Paracetamo4444l":[0,1,4,0]}
+        # for key in medicines.keys():
+        #     print(key,med[key][-1])
+        i=-1
+        for key in medicines.keys():
+            i=i+1
+            self.prescription.textBrowser_3 = QtWidgets.QTextBrowser(self.prescription.scrollAreaWidgetContents)
+            self.prescription.verticalLayout_2.addWidget(self.prescription.textBrowser_3)
+            self.prescription.pushButton_10 = QtWidgets.QPushButton(self.prescription.scrollAreaWidgetContents)
+            self.prescription.pushButton_10.setObjectName("pushButton"+str(i))
+            self.prescription.pushButton_10.setStyleSheet("background-color:rgb(43, 86, 190)")
+            self.prescription.verticalLayout_2.addWidget(self.prescription.pushButton_10)
+            self.prescription.pushButton_10.setText("Add to prescription")
+            self.prescription.pushButton_10.clicked.connect(self.work(key, str(medicines[key][-1])))
             self.prescription.textBrowser_3.viewport().setProperty("cursor", QtGui.QCursor(QtCore.Qt.PointingHandCursor))
             self.prescription.textBrowser_3.setMouseTracking(True)
             self.prescription.textBrowser_3.setTabletTracking(True)
             self.prescription.textBrowser_3.setAutoFillBackground(True)
             self.prescription.textBrowser_3.setStyleSheet("selection-background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(255, 255, 255, 255), stop:0.1 rgba(255, 255, 255, 255), stop:0.2 rgba(255, 176, 176, 167), stop:0.3 rgba(255, 151, 151, 92), stop:0.4 rgba(255, 125, 125, 51), stop:0.5 rgba(255, 76, 76, 205), stop:0.52 rgba(255, 76, 76, 205), stop:0.6 rgba(255, 180, 180, 84), stop:1 rgba(255, 255, 255, 0));")
+            self.prescription.textBrowser_3.document().setDefaultStyleSheet('div{margin:5px 20px; margin-top: 10px} span{float:right}')
             self.prescription.textBrowser_3.setObjectName("textBrowser_"+str(i))
-            self.prescription.label.setText(key+"  "+str(med[key][-1]))
-    #         self.prescription.textBrowser_3.setHtml("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-    # "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-    # "p, li { white-space: pre-wrap; }\n"
-    # "</style></head>{% block body %}style=\" font-family:\'Ubuntu\'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
-    # "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt;\"> </span></p>\n"
-    # "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'MS Shell Dlg 2\'; font-size:8.25pt;\"><br /></p>\n"
-    # "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'MS Shell Dlg 2\'; font-size:8pt;\">1 tablet morning, noon &amp; after bed for 1<br />week </span></p><button>Raghav</button>{% endblock %}</html>")
-            
+            cursor=self.prescription.textBrowser_3.textCursor()
+            cursor.insertHtml('''<div style="color:black;font-size:23px; padding:100px">{}</div><div>{}</div>'''.format(key+"  "+str(medicines[key][-1])+"mg    ",'1-0-1'))
+          
         QtWidgets.qApp.processEvents()
         # self.prescription.setupUi(self)
         self.prescription.pushButton_9.clicked.connect(self.goReport)
@@ -295,11 +377,44 @@ class MainWindow(QMainWindow):
 
     def goReport(self):
         self.report.setupUi(self)
-        details=req.get('https://uinames.com/api/?amount=1')
-        details=json.loads(details.text)
-        print(details["name"])
-        self.report.label_4.setText(details["name"]+details["surname"])
-        self.report.label_5.setText(details["gender"])
+        today=date.today()
+        d2 = today.strftime("%B %d, %Y")
+        d2="Prescription for "+d2
+        print(self.prescribed)
+        str=""
+        for i in self.prescribed:
+            str=str+i+" mg"+"\n"
+        self.report.pres.setText(str)
+        self.report.label_6.setText(d2)
+        self.report.label_6.setStyleSheet("color:white;font-size:30px")
+        self.report.pres.setStyleSheet("font-size:20px")
+        self.report.label_4.setFont(QtGui.QFont("Times", 15, QtGui.QFont.Bold))
+        # self.report.label_5.setText(patient["pid"])
+        self.report.label_5 = QtWidgets.QLabel(self.report.widget_2)
+        self.report.label_5.setGeometry(QtCore.QRect(50,240, 250,17))
+        self.report.label_5.setObjectName("age")
+        self.report.label_5.setText(self.patient["age"])
+        self.report.label_5 = QtWidgets.QLabel(self.report.widget_2)
+        self.report.label_5.setGeometry(QtCore.QRect(50,260, 250,17))
+        self.report.label_5.setObjectName("gender")
+        self.report.label_5.setText(self.patient["gender"])
+        self.report.label_5 = QtWidgets.QLabel(self.report.widget_2)
+        self.report.label_5.setGeometry(QtCore.QRect(50,280, 250,17))
+        self.report.label_5.setObjectName("BMI")
+        self.report.label_5.setText(self.patient["BMI"])
+        self.report.label_5 = QtWidgets.QLabel(self.report.widget_2)
+        self.report.label_5.setGeometry(QtCore.QRect(50,300, 250,17))
+        self.report.label_5.setObjectName("address")
+        self.report.label_5.setText(self.patient["address"])
+        self.report.label_5 = QtWidgets.QLabel(self.report.widget_2)
+        self.report.label_5.setGeometry(QtCore.QRect(50,320, 250,17))
+        self.report.label_5.setObjectName("phone")
+        self.report.label_5.setText(self.patient["phone"])
+        # details=req.get('https://uinames.com/api/?amount=1')
+        # details=json.loads(details.text)
+        # print(details["name"])
+        self.report.label_4.setText(self.patient["pid"])
+        # self.report.label_5.setText(details["gender"])
         # self.homepage.pushButton.setText("Clicked")
         # self.prescription.setupUi(self)
         self.show()

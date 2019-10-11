@@ -32,7 +32,8 @@ class Ui_DocAid(object):
         self.label_3.setObjectName("label_3")
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton.setGeometry(QtCore.QRect(520, 370, 171, 41))
-        self.pushButton.setStyleSheet("background-color:rgb(43, 86, 190)")
+        self.pushButton.setStyleSheet("background-color:rgb(43, 86, 190);\n"
+"color:rgb(255, 255, 255)")
         self.pushButton.setObjectName("pushButton")
         DocAid.setCentralWidget(self.centralwidget)
 
