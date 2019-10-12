@@ -199,8 +199,8 @@ class MainWindow(QMainWindow):
         self.docAid.pushButton.setIcon(QIcon("./images/blue-loader.gif"))
         QtWidgets.qApp.processEvents()
         data="POC0012"
-        # data=self.QR_check()
-        # print(data)
+        data=self.QR_check()
+        print(data)
         params1 = {
             "pid":data
         }
@@ -219,49 +219,53 @@ class MainWindow(QMainWindow):
         self.homepage.label_5 = QtWidgets.QLabel(self.homepage.widget_2)
         self.homepage.label_5.setGeometry(QtCore.QRect(50,240, 250,17))
         self.homepage.label_5.setObjectName("age")
-        self.homepage.label_5.setText(details["age"])
+        self.homepage.label_5.setText("Age: "+details["age"])
         self.homepage.label_5 = QtWidgets.QLabel(self.homepage.widget_2)
         self.homepage.label_5.setGeometry(QtCore.QRect(50,260, 250,17))
         self.homepage.label_5.setObjectName("gender")
-        self.homepage.label_5.setText(details["gender"])
+        self.homepage.label_5.setText("Gender: "+details["gender"])
         self.homepage.label_5 = QtWidgets.QLabel(self.homepage.widget_2)
         self.homepage.label_5.setGeometry(QtCore.QRect(50,280, 250,17))
-        self.homepage.label_5.setObjectName("BMI")
-        self.homepage.label_5.setText(details["BMI"])
+        self.homepage.label_5.setObjectName("bmi")
+        self.homepage.label_5.setText("BMI: "+details["bmi"])
         self.homepage.label_5 = QtWidgets.QLabel(self.homepage.widget_2)
         self.homepage.label_5.setGeometry(QtCore.QRect(50,300, 250,17))
         self.homepage.label_5.setObjectName("address")
-        self.homepage.label_5.setText(details["address"])
+        self.homepage.label_5.setText("Address: "+details["address"])
         self.homepage.label_5 = QtWidgets.QLabel(self.homepage.widget_2)
         self.homepage.label_5.setGeometry(QtCore.QRect(50,320, 250,17))
         self.homepage.label_5.setObjectName("phone")
-        self.homepage.label_5.setText(details["phone"])
+        self.homepage.label_5.setText("Phone: "+details["phone"])
         history=req.get("http://34.93.231.96:5000/diagonized_medicines", json=params1)
         # history=json.loads(history.json())
         # print(history.json())
         # print(type(history.text))
         # print(history.text.values())
         arr=[]
-        history=history.json()
-        # print(history)
-        for a in history.keys():
-            arr.append({'date':a,'medicine':history[a]['medicines']})
-        print(arr)
-        for dosage in arr[::-1]:
-            print(dosage)
-            str=""
-            self.homepage.textBrowser_2 = QtWidgets.QTextBrowser(self.homepage.scrollAreaWidgetContents)
-            self.homepage.textBrowser_2.setObjectName("textBrowser_2")
-            self.homepage.verticalLayout_2.addWidget(self.homepage.textBrowser_2)
-            # str="Visited on "+dosage['date'][0:8]+"\n\n"
-            cursor=self.homepage.textBrowser_2.textCursor()
-            cursor.insertHtml('''<div style="font-size:25px;color:#2B56BE">Visited on {}</div>'''.format(dosage['date'][0:8]))
-            # cursor.insertHtml('''<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">{}</p>'''.format(dosage['date'][0:8]+"\n"))
-            for i in dosage['medicine']:
-                # str=str+"\t"+i['name']+"  "+i['dosage']+" mg"+"\n"
-                cursor.insertHtml('''<br></br><p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">{}</p>'''.format(i['name']+" "+i['dosage']+" mg"))
-            # self.homepage.textBrowser_2.setText(str)
-            # self.homepage.textBrowser_2.setStyleSheet("font-size:25px")
+        
+        if history is None:
+            print("No history")
+        else:
+            history=history.json()
+            # print(history)
+            for a in history.keys():
+                arr.append({'date':a,'medicine':history[a]['medicines']})
+            print(arr)
+            for dosage in arr[::-1]:
+                print(dosage)
+                str=""
+                self.homepage.textBrowser_2 = QtWidgets.QTextBrowser(self.homepage.scrollAreaWidgetContents)
+                self.homepage.textBrowser_2.setObjectName("textBrowser_2")
+                self.homepage.verticalLayout_2.addWidget(self.homepage.textBrowser_2)
+                # str="Visited on "+dosage['date'][0:8]+"\n\n"
+                cursor=self.homepage.textBrowser_2.textCursor()
+                cursor.insertHtml('''<div style="font-size:25px;color:#2B56BE">Visited on {}</div>'''.format(dosage['date'][0:8]))
+                # cursor.insertHtml('''<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">{}</p>'''.format(dosage['date'][0:8]+"\n"))
+                for i in dosage['medicine']:
+                    # str=str+"\t"+i['name']+"  "+i['dosage']+" mg"+"\n"
+                    cursor.insertHtml('''<br></br><p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">{}</p>'''.format(i['name']+" "+i['dosage']+" mg"))
+                # self.homepage.textBrowser_2.setText(str)
+                # self.homepage.textBrowser_2.setStyleSheet("font-size:25px")
         self.homepage.pushButton.clicked.connect(self.goPrescription)
         self.show()
     
@@ -327,7 +331,7 @@ class MainWindow(QMainWindow):
         print(feature_search(string))
         data1 = feature_search(string)
         # data=[1,0,0,1,0,1,0,0,0,1]
-        r=req.post("http://34.93.231.96:5000/prediction",json={"val":data1})
+        r=req.post("http://34.93.231.96:5000/prediction",json={"val":data1, "patient":self.patient})
         # data1=[{'Dengue': [1, {'Acetaminophen': [1, 1, 1, 650, 1, 0, 1, 7, 1], 'Aspirin': [2, 1, 1, 500, 0, 0, 1, 3, 1], 'Ostoshine': [5, 1, 1, 6000, 0, 1, 0, 4, 1], 'Platimax': [3, 1, 0, 500, 0, 1, 1, 3, 1], 'Qubinor': [4, 1, 1, 600, 0, 1, 0, 4, 1]}]}, ['skin_rash', 'fatigue', 'loss_of_appetite', 'muscle_pain']]
         data1 = pickle.loads(r.content)
         print(data1)
@@ -403,7 +407,7 @@ class MainWindow(QMainWindow):
         self.report.label_5.setGeometry(QtCore.QRect(50,280, 250,17))
         self.report.label_5.setObjectName("BMI")
         self.report.label_5.setText(self.patient["BMI"])
-        self.report.label_5 = QtWidgets.QLabel(self.report.widget_2)
+        self.report.label_5 = QtWidgets.QLabel(self.report.widget_2)    
         self.report.label_5.setGeometry(QtCore.QRect(50,300, 250,17))
         self.report.label_5.setObjectName("address")
         self.report.label_5.setText(self.patient["address"])
