@@ -51,7 +51,7 @@ class Ui_Report(object):
         self.label_6.setObjectName("label_6")
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton.setGeometry(QtCore.QRect(1040, 590, 131, 41))
-        self.pushButton.setStyleSheet("background-color:rgb(43, 86, 190)")
+        self.pushButton.setStyleSheet("background-color:rgb(43, 86, 190);color:rgb(255, 255, 255)")
         self.pushButton.setObjectName("pushButton")
         self.pres = QtWidgets.QLabel(self.centralwidget)
         self.pres.setGeometry(QtCore.QRect(310, 240, 861, 321))

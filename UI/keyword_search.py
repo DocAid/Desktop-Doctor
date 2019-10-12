@@ -4,7 +4,7 @@ def feature_search(string):
     s = ['rash','skin','sneeze','cold','acid','acidity','fatigue','nausea','loss','appetite','chest','pain','heart_rate','bladder','discomfort','muscle','pain']
     map_dict = {
         s[0]:set(['rash','skin','rashes','redmarks','itching','irritation','skinburn']),
-        s[1]:set(['sneeze','sneezing','cold','cough']),
+        s[1]:set(['sneeze','sneezing','cold','cough','fever']),
         s[2]:set(['acid','acidity','burning','stomach ache','stomach pain','digestion']),
         s[3]:set(['fatigue','tired','tiredness','hypertension','alwayslazy','lazy','variness','lethargy','drowsiness']),
         s[4]:set(['nausea','vomiting','sickness','puking','motion sickness','morning sickness']),

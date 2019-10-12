@@ -24,9 +24,6 @@ class Ui_Prescription(object):
         self.label.setText("")
         self.label.setPixmap(QtGui.QPixmap("../.designer/Downloads/DeepinScreenshot_20190821152323-removebg-preview.png"))
         self.label.setObjectName("label")
-        self.checkBox = QtWidgets.QCheckBox(self.centralwidget)
-        self.checkBox.setGeometry(QtCore.QRect(40, 100, 91, 21))
-        self.checkBox.setObjectName("checkBox")
         self.pushButton_9 = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_9.setGeometry(QtCore.QRect(1020, 610, 171, 41))
         palette = QtGui.QPalette()
@@ -76,7 +73,7 @@ class Ui_Prescription(object):
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Window, brush)
         self.pushButton_9.setPalette(palette)
-        self.pushButton_9.setStyleSheet("background-color: rgb(43, 86, 190);")
+        self.pushButton_9.setStyleSheet("background-color: rgb(10, 62, 148);")
         self.pushButton_9.setObjectName("pushButton_9")
         self.nav = QtWidgets.QTextBrowser(self.centralwidget)
         self.nav.setGeometry(QtCore.QRect(-10, 0, 1231, 81))
@@ -218,12 +215,6 @@ class Ui_Prescription(object):
         self.verticalLayout_2.setObjectName("verticalLayout_2")
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
         self.verticalLayout.addWidget(self.scrollArea)
-        self.checkBox_2 = QtWidgets.QCheckBox(self.centralwidget)
-        self.checkBox_2.setGeometry(QtCore.QRect(110, 100, 91, 21))
-        self.checkBox_2.setObjectName("checkBox_2")
-        self.checkBox_3 = QtWidgets.QCheckBox(self.centralwidget)
-        self.checkBox_3.setGeometry(QtCore.QRect(170, 100, 91, 21))
-        self.checkBox_3.setObjectName("checkBox_3")
         self.label_5 = QtWidgets.QLabel(self.centralwidget)
         self.label_5.setGeometry(QtCore.QRect(990, 370, 181, 221))
         self.label_5.setText("")
@@ -252,7 +243,6 @@ class Ui_Prescription(object):
 "<p align=\"center\" dir=\'rtl\' style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'MS Shell Dlg 2\'; font-size:10pt;\">Pramila Nair</span></p>\n"
 "<p align=\"center\" dir=\'rtl\' style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'MS Shell Dlg 2\'; font-size:10pt;\">City Hospital</span></p>\n"
 "<p align=\"center\" dir=\'rtl\' style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'MS Shell Dlg 2\'; font-size:10pt;\">MBBS, Neurologist</span></p></body></html>"))
-        self.checkBox.setText(_translate("Prescription", "Fever"))
         self.pushButton_9.setText(_translate("Prescription", "Generate Prescription"))
         self.nav.setHtml(_translate("Prescription", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
@@ -275,8 +265,6 @@ class Ui_Prescription(object):
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'Ubuntu\'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'MS Shell Dlg 2\'; font-size:12pt; color:#ffffff;\">Type in Symptom/Disease</span></p></body></html>"))
-        self.checkBox_2.setText(_translate("Prescription", "Fever"))
-        self.checkBox_3.setText(_translate("Prescription", "Fever"))
 
 
 if __name__ == "__main__":

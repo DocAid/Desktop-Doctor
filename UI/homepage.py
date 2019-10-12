@@ -44,7 +44,7 @@ class Ui_MainWindow(object):
         self.label_4.setObjectName("label_4")
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton.setGeometry(QtCore.QRect(730, 130, 131, 41))
-        self.pushButton.setStyleSheet("background-color: rgb(43, 86, 190)")
+        self.pushButton.setStyleSheet("background-color: rgb(10, 62, 148);color:rgb(255, 255, 255)")
         self.pushButton.setObjectName("pushButton")
         self.label_6 = QtWidgets.QLabel(self.centralwidget)
         self.label_6.setGeometry(QtCore.QRect(670, 120, 41, 51))

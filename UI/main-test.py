@@ -13,11 +13,13 @@ from waste import Ui_Prescription
 from report import Ui_Report
 import json
 from flask import jsonify
+import webbrowser
 from datetime import date
 
 import random
 import time
 import socket
+import pickle
 
 from keyword_search import feature_search
 from google.cloud import speech
@@ -170,14 +172,14 @@ class MainWindow(QMainWindow):
         self.startUIWindow()
 
     def QR_check(self):
-        host = socket.gethostname()
+        host = "34.93.231.96"
         port = 5500
         client = socket.socket()
         client.connect((host, port))
 
         while True:
-            client.send("Hello".encode())
-            data = client.recv(2048).decode()
+            client.send(pickle.dumps({"Hello": "World"}))
+            data = pickle.loads(client.recv(2048))
             print("TEST")
             if data:
                  print(data)
@@ -188,9 +190,7 @@ class MainWindow(QMainWindow):
     def startUIWindow(self):
         self.docAid.setupUi(self)
         self.docAid.pushButton.clicked.connect(self.goHomepage)
-        # self.goHomepage()
-       
-        
+        # self.goHomepage()        
         self.show()
 
 
@@ -198,9 +198,9 @@ class MainWindow(QMainWindow):
         self.docAid.pushButton.setText("Waiting for scan")
         self.docAid.pushButton.setIcon(QIcon("./images/blue-loader.gif"))
         QtWidgets.qApp.processEvents()
+        data="POC0012"
         # data=self.QR_check()
         # print(data)
-        data="POC0012"
         params1 = {
             "pid":data
         }
@@ -249,18 +249,19 @@ class MainWindow(QMainWindow):
         print(arr)
         for dosage in arr[::-1]:
             print(dosage)
+            str=""
             self.homepage.textBrowser_2 = QtWidgets.QTextBrowser(self.homepage.scrollAreaWidgetContents)
             self.homepage.textBrowser_2.setObjectName("textBrowser_2")
             self.homepage.verticalLayout_2.addWidget(self.homepage.textBrowser_2)
-            str="Visited on "+dosage['date'][0:8]+"\n\n"
-            # cursor=self.homepage.textBrowser_2.textCursor()
-            # cursor.insertHtml('''<p>{}</p><p>{}</p>'''.format("hello","world"))
+            # str="Visited on "+dosage['date'][0:8]+"\n\n"
+            cursor=self.homepage.textBrowser_2.textCursor()
+            cursor.insertHtml('''<div style="font-size:25px;color:#2B56BE">Visited on {}</div>'''.format(dosage['date'][0:8]))
             # cursor.insertHtml('''<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">{}</p>'''.format(dosage['date'][0:8]+"\n"))
             for i in dosage['medicine']:
-                str=str+"\t"+i['name']+"  "+i['dosage']+" mg"+"\n"
-                # cursor.insertHtml('''<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">{}</p>'''.format(i['dosage']+i['name']))
-            self.homepage.textBrowser_2.setText(str)
-            self.homepage.textBrowser_2.setStyleSheet("font-size:25px")
+                # str=str+"\t"+i['name']+"  "+i['dosage']+" mg"+"\n"
+                cursor.insertHtml('''<br></br><p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">{}</p>'''.format(i['name']+" "+i['dosage']+" mg"))
+            # self.homepage.textBrowser_2.setText(str)
+            # self.homepage.textBrowser_2.setStyleSheet("font-size:25px")
         self.homepage.pushButton.clicked.connect(self.goPrescription)
         self.show()
     
@@ -287,26 +288,26 @@ class MainWindow(QMainWindow):
         self.homepage.pushButton.setIcon(QIcon("./images/blue-loader.gif"))
         QtWidgets.qApp.processEvents()
         string=""
-        # language_code = 'en-US'  # a BCP-47 language tag
+        language_code = 'en-US'  # a BCP-47 language tag
 
-        # client = speech.SpeechClient()
-        # config = types.RecognitionConfig(
-        #     encoding=enums.RecognitionConfig.AudioEncoding.LINEAR16,
-        #     sample_rate_hertz=RATE,
-        #     language_code=language_code)
-        # streaming_config = types.StreamingRecognitionConfig(
-        #     config=config,
-        #     interim_results=True)
+        client = speech.SpeechClient()
+        config = types.RecognitionConfig(
+            encoding=enums.RecognitionConfig.AudioEncoding.LINEAR16,
+            sample_rate_hertz=RATE,
+            language_code=language_code)
+        streaming_config = types.StreamingRecognitionConfig(
+            config=config,
+            interim_results=True)
 
-        # with MicrophoneStream(RATE, CHUNK) as stream:
-        #     audio_generator = stream.generator()
-        #     requests = (types.StreamingRecognizeRequest(audio_content=content)
-        #                 for content in audio_generator)
+        with MicrophoneStream(RATE, CHUNK) as stream:
+            audio_generator = stream.generator()
+            requests = (types.StreamingRecognizeRequest(audio_content=content)
+                        for content in audio_generator)
 
-        #     responses = client.streaming_recognize(streaming_config, requests)
+            responses = client.streaming_recognize(streaming_config, requests)
 
-        #     # Now, put the transcription responses to use.
-        #     string=listen_print_loop(responses)
+            # Now, put the transcription responses to use.
+            string=listen_print_loop(responses)
         print(string)
         # blob = TextBlob(string)
         # number_of_tokens = len(list(blob.words))
@@ -325,14 +326,16 @@ class MainWindow(QMainWindow):
         # print(summary)
         print(feature_search(string))
         data1 = feature_search(string)
-        data=[1,0,0,1,0,1,0,0,0,1]
-        # r=req.post("http://a74611e4.ngrok.io/prediction",json={"val":data})
-        data1=[{'Dengue': [1, {'Acetaminophen': [1, 1, 1, 650, 1, 0, 1, 7, 1], 'Aspirin': [2, 1, 1, 500, 0, 0, 1, 3, 1], 'Ostoshine': [5, 1, 1, 6000, 0, 1, 0, 4, 1], 'Platimax': [3, 1, 0, 500, 0, 1, 1, 3, 1], 'Qubinor': [4, 1, 1, 600, 0, 1, 0, 4, 1]}]}, ['skin_rash', 'fatigue', 'loss_of_appetite', 'muscle_pain']]
-        # print(r.json())
-        # data1=r.json()
+        # data=[1,0,0,1,0,1,0,0,0,1]
+        r=req.post("http://34.93.231.96:5000/prediction",json={"val":data1})
+        # data1=[{'Dengue': [1, {'Acetaminophen': [1, 1, 1, 650, 1, 0, 1, 7, 1], 'Aspirin': [2, 1, 1, 500, 0, 0, 1, 3, 1], 'Ostoshine': [5, 1, 1, 6000, 0, 1, 0, 4, 1], 'Platimax': [3, 1, 0, 500, 0, 1, 1, 3, 1], 'Qubinor': [4, 1, 1, 600, 0, 1, 0, 4, 1]}]}, ['skin_rash', 'fatigue', 'loss_of_appetite', 'muscle_pain']]
+        data1 = pickle.loads(r.content)
+        print(data1)
+        data1=list(data1)
         # medicines=[r.json()[key][1] if key not 'symptoms' in for key in r.json().keys]
-        for a in data1[0].keys():
-            medicines=data1[0][a][1]
+        medicines={}
+        for a in data1[0]:
+            medicines[a]=data1[0][a]
         print(medicines)
         symptoms=data1[1]
         print(symptoms)
@@ -341,10 +344,10 @@ class MainWindow(QMainWindow):
         for x in symptoms:
             i=i+1
             self.prescription.checkBox = QtWidgets.QCheckBox(self.prescription.centralwidget)
-            self.prescription.checkBox.setGeometry(QtCore.QRect(40+(i*70), 100, 91, 21))
+            self.prescription.checkBox.setGeometry(QtCore.QRect(40+(i*90), 100, 191, 21))
             self.prescription.checkBox.setObjectName("checkBox"+str(i))
             self.prescription.checkBox.setText(x)
-        # med={"Calpol":[1,0,1,500], "Paracetamol":[0,1,4,0],"Calpol4":[1,0,1,500], "Paracetam4ol":[0,1,4,0],"C4alpol":[1,0,1,500], "Paracetamo4l":[0,1,4,0],"Ca44lpol":[1,0,1,500], "Paracetamo44l":[0,1,4,0],"Calpol444":[1,0,1,500], "Paracetamo4444l":[0,1,4,0]}
+        # med={"Calpol":[1,0,1,500], "Paracetamol":[0,1,4,0],"Calpol4":[1,0,1,500], "Pasracetam4ol":[0,1,4,0],"C4alpol":[1,0,1,500], "Paracetamo4l":[0,1,4,0],"Ca44lpol":[1,0,1,500], "Paracetamo44l":[0,1,4,0],"Calpol444":[1,0,1,500], "Paracetamo4444l":[0,1,4,0]}
         # for key in medicines.keys():
         #     print(key,med[key][-1])
         i=-1
@@ -354,10 +357,10 @@ class MainWindow(QMainWindow):
             self.prescription.verticalLayout_2.addWidget(self.prescription.textBrowser_3)
             self.prescription.pushButton_10 = QtWidgets.QPushButton(self.prescription.scrollAreaWidgetContents)
             self.prescription.pushButton_10.setObjectName("pushButton"+str(i))
-            self.prescription.pushButton_10.setStyleSheet("background-color:rgb(43, 86, 190)")
+            self.prescription.pushButton_10.setStyleSheet("background-color:rgb(43, 86, 190);color:rgb(255, 255, 255)")
             self.prescription.verticalLayout_2.addWidget(self.prescription.pushButton_10)
             self.prescription.pushButton_10.setText("Add to prescription")
-            self.prescription.pushButton_10.clicked.connect(self.work(key, str(medicines[key][-1])))
+            self.prescription.pushButton_10.clicked.connect(self.work(key, str(medicines[key][3])))
             self.prescription.textBrowser_3.viewport().setProperty("cursor", QtGui.QCursor(QtCore.Qt.PointingHandCursor))
             self.prescription.textBrowser_3.setMouseTracking(True)
             self.prescription.textBrowser_3.setTabletTracking(True)
@@ -366,20 +369,18 @@ class MainWindow(QMainWindow):
             self.prescription.textBrowser_3.document().setDefaultStyleSheet('div{margin:5px 20px; margin-top: 10px} span{float:right}')
             self.prescription.textBrowser_3.setObjectName("textBrowser_"+str(i))
             cursor=self.prescription.textBrowser_3.textCursor()
-            cursor.insertHtml('''<div style="color:black;font-size:23px; padding:100px">{}</div><div>{}</div>'''.format(key+"  "+str(medicines[key][-1])+"mg    ",'1-0-1'))
+            cursor.insertHtml('''<div style="color:black;font-size:23px; padding:100px">{}</div><div>{}</div>'''.format(key+"  "+str(medicines[key][3])+"mg    ",'1-0-1'))
           
         QtWidgets.qApp.processEvents()
         # self.prescription.setupUi(self)
         self.prescription.pushButton_9.clicked.connect(self.goReport)
         self.show()
 
-        
-
     def goReport(self):
         self.report.setupUi(self)
         today=date.today()
-        d2 = today.strftime("%B %d, %Y")
-        d2="Prescription for "+d2
+        d2 = today.strftime("%B  %d")
+        d2="Prescription  for  "+d2
         print(self.prescribed)
         str=""
         for i in self.prescribed:
@@ -417,7 +418,24 @@ class MainWindow(QMainWindow):
         # self.report.label_5.setText(details["gender"])
         # self.homepage.pushButton.setText("Clicked")
         # self.prescription.setupUi(self)
+        print(self.patient["pid"],self.patient["age"],self.patient["BMI"], self.prescribed)
+        self.report.pushButton.clicked.connect(self.pdf)
         self.show()
+    
+    def pdf(self):
+        meds=[]
+        for a in self.prescribed:
+            meds.append({"name":a,"dosage":"1-0-1","qty":"600 mg"})
+        data={
+            "age":self.patient["age"],
+            "pid":self.patient["pid"],
+            "bmi":self.patient["BMI"],
+            "dosages":meds
+        }
+        p=req.post("http://50269098.ngrok.io/rg",json=data)
+        url = p.text
+        webbrowser.open(url)
+
 
 if __name__ == "__main__":
     import sys

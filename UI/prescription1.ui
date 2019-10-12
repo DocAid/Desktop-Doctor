@@ -58,19 +58,6 @@ p, li { white-space: pre-wrap; }
      <pixmap>../.designer/Downloads/DeepinScreenshot_20190821152323-removebg-preview.png</pixmap>
     </property>
    </widget>
-   <widget class="QCheckBox" name="checkBox">
-    <property name="geometry">
-     <rect>
-      <x>40</x>
-      <y>100</y>
-      <width>91</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Fever</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="pushButton_9">
     <property name="geometry">
      <rect>
@@ -676,32 +663,6 @@ p, li { white-space: pre-wrap; }
       </widget>
      </item>
     </layout>
-   </widget>
-   <widget class="QCheckBox" name="checkBox_2">
-    <property name="geometry">
-     <rect>
-      <x>110</x>
-      <y>100</y>
-      <width>91</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Fever</string>
-    </property>
-   </widget>
-   <widget class="QCheckBox" name="checkBox_3">
-    <property name="geometry">
-     <rect>
-      <x>170</x>
-      <y>100</y>
-      <width>91</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Fever</string>
-    </property>
    </widget>
    <widget class="QLabel" name="label_5">
     <property name="geometry">
