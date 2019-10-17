@@ -202,10 +202,6 @@ class MainWindow(QMainWindow):
         params1 = {
             "pid":data
         }
-        # data=jsonify(params1)
-        # print(data)
-        # self.docAid.pushButton.setIcon(QIcon("./images/ajax-loader.gif"))
-        # QtWidgets.qApp.processEvents()
         details=req.get(url='http://34.93.231.96:5000/patient_details', json=params1)
         print(details.text)
         details=json.loads(details.text)
