@@ -50,8 +50,6 @@ class MicrophoneStream(object):
         self._audio_interface = pyaudio.PyAudio()
         self._audio_stream = self._audio_interface.open(
             format=pyaudio.paInt16,
-            # The API currently only supports 1-channel (mono) audio
-            # https://goo.gl/z757pE
             channels=1, rate=self._rate,
             input=True, frames_per_buffer=self._chunk,
             # Run the audio stream asynchronously to fill the buffer object.
@@ -204,10 +202,6 @@ class MainWindow(QMainWindow):
         params1 = {
             "pid":data
         }
-        # data=jsonify(params1)
-        # print(data)
-        # self.docAid.pushButton.setIcon(QIcon("./images/ajax-loader.gif"))
-        # QtWidgets.qApp.processEvents()
         details=req.get(url='http://34.93.231.96:5000/patient_details', json=params1)
         print(details.text)
         details=json.loads(details.text)
@@ -237,10 +231,6 @@ class MainWindow(QMainWindow):
         self.homepage.label_5.setObjectName("phone")
         self.homepage.label_5.setText("Phone: "+details["phone"])
         history=req.get("http://34.93.231.96:5000/diagonized_medicines", json=params1)
-        # history=json.loads(history.json())
-        # print(history.json())
-        # print(type(history.text))
-        # print(history.text.values())
         arr=[]
         
         if history is None:
@@ -400,28 +390,22 @@ class MainWindow(QMainWindow):
         self.report.label_5.setObjectName("age")
         self.report.label_5.setText(self.patient["age"])
         self.report.label_5 = QtWidgets.QLabel(self.report.widget_2)
-        self.report.label_5.setGeometry(QtCore.QRect(50,260, 250,17))
+        self.report.label_5.setGeometry(QtCore.QRect(50,270, 250,17))
         self.report.label_5.setObjectName("gender")
         self.report.label_5.setText(self.patient["gender"])
         self.report.label_5 = QtWidgets.QLabel(self.report.widget_2)
-        self.report.label_5.setGeometry(QtCore.QRect(50,280, 250,17))
+        self.report.label_5.setGeometry(QtCore.QRect(50,300, 250,17))
         self.report.label_5.setObjectName("BMI")
         self.report.label_5.setText(self.patient["BMI"])
         self.report.label_5 = QtWidgets.QLabel(self.report.widget_2)    
-        self.report.label_5.setGeometry(QtCore.QRect(50,300, 250,17))
+        self.report.label_5.setGeometry(QtCore.QRect(50,330, 250,17))
         self.report.label_5.setObjectName("address")
         self.report.label_5.setText(self.patient["address"])
         self.report.label_5 = QtWidgets.QLabel(self.report.widget_2)
-        self.report.label_5.setGeometry(QtCore.QRect(50,320, 250,17))
+        self.report.label_5.setGeometry(QtCore.QRect(50,360, 250,17))
         self.report.label_5.setObjectName("phone")
         self.report.label_5.setText(self.patient["phone"])
-        # details=req.get('https://uinames.com/api/?amount=1')
-        # details=json.loads(details.text)
-        # print(details["name"])
         self.report.label_4.setText(self.patient["pid"])
-        # self.report.label_5.setText(details["gender"])
-        # self.homepage.pushButton.setText("Clicked")
-        # self.prescription.setupUi(self)
         print(self.patient["pid"],self.patient["age"],self.patient["BMI"], self.prescribed)
         self.report.pushButton.clicked.connect(self.pdf)
         self.show()
