@@ -1,0 +1,15 @@
+<RCC>
+  <qresource prefix="newPrefix">
+    <file>images/24px.svg</file>
+    <file>images/17004.svg</file>
+    <file>images/App 1.png</file>
+    <file>images/App 2.png</file>
+    <file>images/color-details</file>
+    <file>images/DeepinScreenshot_20190821152323-removebg-preview.png</file>
+    <file>images/Desktop.png</file>
+    <file>images/doctor-background-design_1270-62.png</file>
+    <file>images/microphone.png</file>
+    <file>images/microphone-solid.svg</file>
+    <file>images/search.svg</file>
+  </qresource>
+</RCC>
