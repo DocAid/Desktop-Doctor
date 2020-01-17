@@ -3,7 +3,6 @@ from __future__ import division
 import re
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 import requests as req
@@ -12,7 +11,6 @@ from homepage import Ui_MainWindow
 from waste import Ui_Prescription
 from report import Ui_Report
 import json
-from flask import jsonify
 import webbrowser
 from datetime import date
 
@@ -151,7 +149,6 @@ def listen_print_loop(responses):
                 # break
 
             num_chars_printed = 0
-
 
 
 class Mainwindow(QMainWindow):
