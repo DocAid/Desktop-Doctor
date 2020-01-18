@@ -23,6 +23,7 @@ from google.cloud.speech import enums
 from google.cloud.speech import types
 import pyaudio
 from six.moves import queue
+from textblob import TextBlob, Word
 
 # Audio recording parameters
 RATE = 16000
@@ -182,6 +183,7 @@ class Mainwindow(QMainWindow):
     def start_ui_window(self):
         self.docAid.setupUi(self)
         self.docAid.pushButton.clicked.connect(self.go_homepage)
+        #self.prescription.setupUi(self)
         self.show()
 
     def go_homepage(self):

@@ -23,7 +23,7 @@ class Ui_MainWindow(object):
         self.label = QtWidgets.QLabel(self.widget)
         self.label.setGeometry(QtCore.QRect(30, 10, 65, 60))
         self.label.setText("")
-        self.label.setPixmap(QtGui.QPixmap("../venv/images/DeepinScreenshot_20190821152323-removebg-preview.png"))
+        self.label.setPixmap(QtGui.QPixmap("./images/DeepinScreenshot_20190821152323-removebg-preview.png"))
         self.label.setObjectName("label")
         self.label_2 = QtWidgets.QLabel(self.widget)
         self.label_2.setGeometry(QtCore.QRect(110, 20, 121, 41))
@@ -83,7 +83,7 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.label_2.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:26pt; font-weight:600; color:#ffffff;\">DocAid</span></p></body></html>"))
-        self.label_4.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:20pt;\">Rohit Nagraj</span></p></body></html>"))
+        self.label_4.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:18pt;\">Rohit Nagraj</span></p></body></html>"))
         self.pushButton.setText(_translate("MainWindow", "Start Listening"))
 
 
