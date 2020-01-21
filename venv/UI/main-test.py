@@ -25,6 +25,8 @@ import pyaudio
 from six.moves import queue
 from textblob import TextBlob, Word
 
+from config import socketIp, serverAddr
+
 # Audio recording parameters
 RATE = 16000
 CHUNK = int(RATE / 10)  # 100ms
@@ -32,7 +34,6 @@ CHUNK = int(RATE / 10)  # 100ms
 
 class MicrophoneStream(object):
     """Opens a recording stream as a generator yielding the audio chunks."""
-
     def __init__(self, rate, chunk):
         self._rate = rate
         self._chunk = chunk
@@ -45,6 +46,8 @@ class MicrophoneStream(object):
         self._audio_interface = pyaudio.PyAudio()
         self._audio_stream = self._audio_interface.open(
             format=pyaudio.paInt16,
+            # The API currently only supports 1-channel (mono) audio
+            # https://goo.gl/z757pE
             channels=1, rate=self._rate,
             input=True, frames_per_buffer=self._chunk,
             # Run the audio stream asynchronously to fill the buffer object.
@@ -57,7 +60,7 @@ class MicrophoneStream(object):
 
         return self
 
-    def __exit__(self, type1, value, traceback):
+    def __exit__(self, type, value, traceback):
         self._audio_stream.stop_stream()
         self._audio_stream.close()
         self.closed = True
@@ -66,7 +69,7 @@ class MicrophoneStream(object):
         self._buff.put(None)
         self._audio_interface.terminate()
 
-    def _fill_buffer(self, in_data):
+    def _fill_buffer(self, in_data, frame_count, time_info, status_flags):
         """Continuously collect data from the audio stream, into the buffer."""
         self._buff.put(in_data)
         return None, pyaudio.paContinue
@@ -95,16 +98,13 @@ class MicrophoneStream(object):
 
 
 def listen_print_loop(responses):
-    string = ""
+    string=""
     """Iterates through server responses and prints them.
-
     The responses passed is a generator that will block until a response
     is provided by the server.
-
     Each response may contain multiple results, and each result may contain
     multiple alternatives; for details, see https://goo.gl/tjCPAU.  Here we
     print only the transcription for the top alternative of the top result.
-
     In this case, responses are provided for interim results as well. If the
     response is an interim one, print a line feed at the end of it, to allow
     the next result to overwrite it, until the response is a final one. For the
@@ -147,9 +147,6 @@ def listen_print_loop(responses):
                 print(string)
                 print('Exiting..')
                 return string
-                # break
-
-            num_chars_printed = 0
 
 
 class Mainwindow(QMainWindow):
@@ -162,7 +159,7 @@ class Mainwindow(QMainWindow):
         self.patient = {}
         self.report = Ui_Report()
         self.start_ui_window()
-        self.host = "34.93.231.96"
+        self.host = socketIp
         self.port = 5500
         self.client = socket.socket()
         self.data = None
@@ -195,7 +192,7 @@ class Mainwindow(QMainWindow):
         params1 = {
             "pid": data
         }
-        details = req.get(url='http://34.93.231.96:5000/patient_details', json=params1)
+        details = req.get(url=serverAddr + '/patient_details', json=params1)
         print(details.text)
         details = json.loads(details.text)
         self.patient = details
@@ -223,29 +220,29 @@ class Mainwindow(QMainWindow):
         self.homepage.label_5.setGeometry(QtCore.QRect(50, 320, 250, 17))
         self.homepage.label_5.setObjectName("phone")
         self.homepage.label_5.setText("Phone: "+details["phone"])
-        history = req.get("http://34.93.231.96:5000/diagonized_medicines", json=params1)
+        history = req.get(serverAddr + "/diagonized_medicines", json=params1)
         arr = []
         
-        if history is None:
-            print("No history")
-        else:
-            history = history.json()
-            for a in history.keys():
-                arr.append({'date': a, 'medicine': history[a]['medicines']})
-            print(arr)
-            for dosage in arr[::-1]:
-                print(dosage)
-                self.homepage.textBrowser_2 = QtWidgets.QTextBrowser(self.homepage.scrollAreaWidgetContents)
-                self.homepage.textBrowser_2.setObjectName("textBrowser_2")
-                self.homepage.verticalLayout_2.addWidget(self.homepage.textBrowser_2)
-                cursor = self.homepage.textBrowser_2.textCursor()
-                cursor.insertHtml('''<div style="font-size:25px;color:#2B56BE">Visited on {}</div>'''.format(
-                    dosage['date'][0:8]))
-
-                for i in dosage['medicine']:
-                    cursor.insertHtml('''<br></br><p style=" margin-top:0px; margin-bottom:0px; margin-left:0px;
-                    margin-right:0px; -qt-block-indent:0; text-indent:0px;">{}</p>'''.format(
-                        i['name']+" "+i['dosage']+" mg"))
+        # if history is None:
+        #     print("No history")
+        # else:
+        #     history = history.json()
+        #     for a in history.keys():
+        #         arr.append({'date': a, 'medicine': history[a]['medicines']})
+        #     print(arr)
+        #     for dosage in arr[::-1]:
+        #         print(dosage)
+        #         self.homepage.textBrowser_2 = QtWidgets.QTextBrowser(self.homepage.scrollAreaWidgetContents)
+        #         self.homepage.textBrowser_2.setObjectName("textBrowser_2")
+        #         self.homepage.verticalLayout_2.addWidget(self.homepage.textBrowser_2)
+        #         cursor = self.homepage.textBrowser_2.textCursor()
+        #         cursor.insertHtml('''<div style="font-size:25px;color:#2B56BE">Visited on {}</div>'''.format(
+        #             dosage['date'][0:8]))
+        #
+        #         for i in dosage['medicine']:
+        #             cursor.insertHtml('''<br></br><p style=" margin-top:0px; margin-bottom:0px; margin-left:0px;
+        #             margin-right:0px; -qt-block-indent:0; text-indent:0px;">{}</p>'''.format(
+        #                 i['name']+" "+i['dosage']+" mg"))
         self.homepage.pushButton.clicked.connect(self.go_prescription)
         self.show()
 
@@ -266,7 +263,6 @@ class Mainwindow(QMainWindow):
         self.homepage.pushButton.setIcon(QIcon("./images/blue-loader.gif"))
         QtWidgets.qApp.processEvents()
         language_code = 'en-US'  # a BCP-47 language tag
-
         client = speech.SpeechClient()
         config = types.RecognitionConfig(
             encoding=enums.RecognitionConfig.AudioEncoding.LINEAR16,
@@ -285,7 +281,7 @@ class Mainwindow(QMainWindow):
 
             # Now, put the transcription responses to use.
             string = listen_print_loop(responses)
-        print(string)
+        print("FINAL STRING: ", string)
         # blob = TextBlob(string)
         # number_of_tokens = len(list(blob.words))
         # # Extracting Main Points
@@ -301,10 +297,10 @@ class Mainwindow(QMainWindow):
         #             final_word.append(word)
         #             summary = final_word
         # print(summary)
-        print(feature_search(string))
+        print("FEATURES: ", feature_search(string))
         data1 = feature_search(string)
         # data=[1,0,0,1,0,1,0,0,0,1]
-        r = req.post("http://34.93.231.96:5000/prediction", json={"val": data1, "patient": self.patient})
+        r = req.post(serverAddr + "/prediction", json={"val": data1, "patient": self.patient})
         # data1=[{'Dengue': [1, {'Acetaminophen': [1, 1, 1, 650, 1, 0, 1, 7, 1],
         # 'Aspirin': [2, 1, 1, 500, 0, 0, 1, 3, 1], 'Ostoshine': [5, 1, 1, 6000, 0, 1, 0, 4, 1],
         # 'Platimax': [3, 1, 0, 500, 0, 1, 1, 3, 1], 'Qubinor': [4, 1, 1, 600, 0, 1, 0, 4, 1]}]},
@@ -414,7 +410,7 @@ class Mainwindow(QMainWindow):
             "bmi": self.patient["BMI"],
             "dosages": meds
         }
-        p = req.post("http://50269098.ngrok.io/rg", json=data)
+        p = req.post(serverAddr + "/rg", json=data)
         url = p.text
         webbrowser.open(url)
 
