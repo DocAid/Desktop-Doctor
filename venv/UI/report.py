@@ -23,7 +23,7 @@ class Ui_Report(object):
         self.label = QtWidgets.QLabel(self.widget)
         self.label.setGeometry(QtCore.QRect(30, 8, 65, 60))
         self.label.setText("")
-        self.label.setPixmap(QtGui.QPixmap("../venv/images/DeepinScreenshot_20190821152323-removebg-preview.png"))
+        self.label.setPixmap(QtGui.QPixmap("./images/DeepinScreenshot_20190821152323-removebg-preview.png"))
         self.label.setObjectName("label")
         self.label_2 = QtWidgets.QLabel(self.widget)
         self.label_2.setGeometry(QtCore.QRect(110, 18, 121, 41))
@@ -35,7 +35,7 @@ class Ui_Report(object):
         self.label_3 = QtWidgets.QLabel(self.widget_2)
         self.label_3.setGeometry(QtCore.QRect(70, 40, 101, 101))
         self.label_3.setText("")
-        self.label_3.setPixmap(QtGui.QPixmap("images/17004.svg"))
+        self.label_3.setPixmap(QtGui.QPixmap("./images/17004.svg"))
         self.label_3.setScaledContents(True)
         self.label_3.setObjectName("label_3")
         self.label_4 = QtWidgets.QLabel(self.widget_2)
@@ -66,7 +66,7 @@ class Ui_Report(object):
         _translate = QtCore.QCoreApplication.translate
         Report.setWindowTitle(_translate("Report", "MainWindow"))
         self.label_2.setText(_translate("Report", "<html><head/><body><p><span style=\" font-size:22pt; font-weight:600; color:#ffffff;\">DocAid</span></p></body></html>"))
-        self.label_4.setText(_translate("Report", "<html><head/><body><p><span style=\" font-size:20pt;\">Rohit Nagraj</span></p></body></html>"))
+        self.label_4.setText(_translate("Report", "<html><head/><body><p><span style=\" font-size:18pt;\">Rohit Nagraj</span></p></body></html>"))
         self.label_6.setText(_translate("Report", "<html><head/><body><p><span style=\" font-size:18pt; color:#ffffff;\">Prescription for Fever</span></p></body></html>"))
         self.pushButton.setText(_translate("Report", "Generate PDF"))
 

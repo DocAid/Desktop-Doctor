@@ -1,0 +1,9 @@
+\venv/bin/*
+\venv/include/*
+\venv/lib/*
+\UI/__pycache__/
+\.idea/
+
+venv/UI/__pycache__/
+
+*.cfg

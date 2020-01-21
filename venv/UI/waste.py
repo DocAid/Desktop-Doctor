@@ -22,7 +22,7 @@ class Ui_Prescription(object):
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(20, 0, 71, 71))
         self.label.setText("")
-        self.label.setPixmap(QtGui.QPixmap("../.designer/Downloads/DeepinScreenshot_20190821152323-removebg-preview.png"))
+        self.label.setPixmap(QtGui.QPixmap("../images/DeepinScreenshot_20190821152323-removebg-preview.png"))
         self.label.setObjectName("label")
         self.pushButton_9 = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_9.setGeometry(QtCore.QRect(1020, 610, 171, 41))
@@ -85,7 +85,7 @@ class Ui_Prescription(object):
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
         self.label_2.setGeometry(QtCore.QRect(990, 150, 181, 141))
         self.label_2.setText("")
-        self.label_2.setPixmap(QtGui.QPixmap("../venv/images/doctor-background-design_1270-62.png"))
+        self.label_2.setPixmap(QtGui.QPixmap("./images/doctor-background-design_1270-62.png"))
         self.label_2.setObjectName("label_2")
         self.label_4 = QtWidgets.QLabel(self.centralwidget)
         self.label_4.setGeometry(QtCore.QRect(740, 10, 9, 17))
@@ -98,7 +98,7 @@ class Ui_Prescription(object):
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
         self.label_3.setGeometry(QtCore.QRect(20, 5, 67, 61))
         self.label_3.setText("")
-        self.label_3.setPixmap(QtGui.QPixmap("images/DeepinScreenshot_20190821152323-removebg-preview.png"))
+        self.label_3.setPixmap(QtGui.QPixmap("./images/DeepinScreenshot_20190821152323-removebg-preview.png"))
         self.label_3.setObjectName("label_3")
         self.label_6 = QtWidgets.QLabel(self.centralwidget)
         self.label_6.setGeometry(QtCore.QRect(100, 15, 111, 37))
@@ -240,9 +240,9 @@ class Ui_Prescription(object):
 "<p align=\"center\" dir=\'rtl\' style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'MS Shell Dlg 2\'; font-size:10pt;\"><br /></p>\n"
 "<p align=\"center\" dir=\'rtl\' style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'MS Shell Dlg 2\'; font-size:10pt;\"><br /></p>\n"
 "<p align=\"center\" dir=\'rtl\' style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'MS Shell Dlg 2\'; font-size:10pt;\"><br /></p>\n"
-"<p align=\"center\" dir=\'rtl\' style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'MS Shell Dlg 2\'; font-size:10pt;\">Pramila Nair</span></p>\n"
-"<p align=\"center\" dir=\'rtl\' style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'MS Shell Dlg 2\'; font-size:10pt;\">City Hospital</span></p>\n"
-"<p align=\"center\" dir=\'rtl\' style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'MS Shell Dlg 2\'; font-size:10pt;\">MBBS, Neurologist</span></p></body></html>"))
+"<p align=\"center\" dir=\'rtl\' style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'MS Shell Dlg 2\'; font-weight:\'bold\'; font-size:7pt;\">PRAMILA NAIR</span></p>\n"
+"<p align=\"center\" dir=\'rtl\' style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'MS Shell Dlg 2\'; font-size:7pt;\">CITY HOSPITAL</span></p>\n"
+"<p align=\"center\" dir=\'rtl\' style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'MS Shell Dlg 2\'; font-size:7pt;\">MBBS, NEUROLOGIST</span></p></body></html>"))
         self.pushButton_9.setText(_translate("Prescription", "Generate Prescription"))
         self.nav.setHtml(_translate("Prescription", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
