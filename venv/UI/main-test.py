@@ -385,10 +385,10 @@ class Mainwindow(QMainWindow):
         self.report.label_5.setText(self.patient["gender"])
         self.report.label_5 = QtWidgets.QLabel(self.report.widget_2)
         self.report.label_5.setGeometry(QtCore.QRect(50, 300, 250, 17))
-        self.report.label_5.setObjectName("BMI")
-        self.report.label_5.setText(self.patient["BMI"])
-        self.report.label_5 = QtWidgets.QLabel(self.report.widget_2)    
-        self.report.label_5.setGeometry(QtCore.QRect(50, 330, 250, 17))
+        # self.report.label_5.setObjectName("BMI")
+        # self.report.label_5.setText(self.patient["BMI"])
+        # self.report.label_5 = QtWidgets.QLabel(self.report.widget_2)
+        # self.report.label_5.setGeometry(QtCore.QRect(50, 330, 250, 17))
         self.report.label_5.setObjectName("address")
         self.report.label_5.setText(self.patient["address"])
         self.report.label_5 = QtWidgets.QLabel(self.report.widget_2)
@@ -396,7 +396,7 @@ class Mainwindow(QMainWindow):
         self.report.label_5.setObjectName("phone")
         self.report.label_5.setText(self.patient["phone"])
         self.report.label_4.setText(self.patient["pid"])
-        print(self.patient["pid"], self.patient["age"], self.patient["BMI"], self.prescribed)
+        # print(self.patient["pid"], self.patient["age"], self.patient["BMI"], self.prescribed)
         self.report.pushButton.clicked.connect(self.pdf)
         self.show()
     
@@ -407,7 +407,7 @@ class Mainwindow(QMainWindow):
         data = {
             "age": self.patient["age"],
             "pid": self.patient["pid"],
-            "bmi": self.patient["BMI"],
+            # "bmi": self.patient["BMI"],
             "dosages": meds
         }
         p = req.post(serverAddr + "/rg", json=data)
