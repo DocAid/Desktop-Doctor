@@ -307,11 +307,8 @@ class Mainwindow(QMainWindow):
         # ['skin_rash', 'fatigue', 'loss_of_appetite', 'muscle_pain']]
         data1 = pickle.loads(r.content)
         print(data1)
-        data1 = list(data1)
         # medicines=[r.json()[key][1] if key not 'symptoms' in for key in r.json().keys]
-        medicines = {}
-        for a in data1[0]:
-            medicines[a] = data1[0][a]
+        medicines = data1[0]
         print(medicines)
         symptoms = data1[1]
         print(symptoms)
@@ -325,7 +322,7 @@ class Mainwindow(QMainWindow):
             self.prescription.checkBox.setText(x)
 
         i = -1
-        for key in medicines.keys():
+        for key in range(len(medicines)):
             i += 1
             self.prescription.textBrowser_3 = QtWidgets.QTextBrowser(self.prescription.scrollAreaWidgetContents)
             self.prescription.verticalLayout_2.addWidget(self.prescription.textBrowser_3)
@@ -334,7 +331,7 @@ class Mainwindow(QMainWindow):
             self.prescription.pushButton_10.setStyleSheet("background-color:rgb(43, 86, 190);color:rgb(255, 255, 255)")
             self.prescription.verticalLayout_2.addWidget(self.prescription.pushButton_10)
             self.prescription.pushButton_10.setText("Add to prescription")
-            self.prescription.pushButton_10.clicked.connect(self.work(key, str(medicines[key][3])))
+            self.prescription.pushButton_10.clicked.connect(self.work(medicines[key][0], str(medicines[key][1][3])))
             self.prescription.textBrowser_3.viewport().setProperty("cursor",
                                                                    QtGui.QCursor(QtCore.Qt.PointingHandCursor))
             self.prescription.textBrowser_3.setMouseTracking(True)
@@ -353,7 +350,7 @@ class Mainwindow(QMainWindow):
             self.prescription.textBrowser_3.setObjectName("textBrowser_"+str(i))
             cursor = self.prescription.textBrowser_3.textCursor()
             cursor.insertHtml('''<div style="color:black;font-size:23px; padding:100px">{}</div><div>{}</div>'''.format(
-                key+"  "+str(medicines[key][3])+"mg    ", '1-0-1'))
+                medicines[key][0]+"  "+str(medicines[key][1][3])+"mg    ", '1-0-1'))
           
         QtWidgets.qApp.processEvents()
         # self.prescription.setupUi(self)
