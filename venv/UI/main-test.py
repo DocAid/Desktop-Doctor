@@ -5,11 +5,13 @@ import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
+from PyQt5.QtCore import *
 import requests as req
 from opening import Ui_DocAid
 from homepage import Ui_MainWindow
 from waste import Ui_Prescription
 from report import Ui_Report
+from chart import Ui_chart
 import json
 import webbrowser
 from datetime import date
@@ -155,6 +157,7 @@ class Mainwindow(QMainWindow):
         self.docAid = Ui_DocAid()
         self.homepage = Ui_MainWindow()
         self.prescription = Ui_Prescription()
+        self.charting = Ui_chart()
         self.prescribed = set()
         self.patient = {}
         self.report = Ui_Report()
@@ -179,8 +182,17 @@ class Mainwindow(QMainWindow):
 
     def start_ui_window(self):
         self.docAid.setupUi(self)
+        button = QPushButton('Statistics',self)
+        button.setToolTip('This is an example button')
+        button.move(555,450)
+        button.clicked.connect(self.on_click)
         self.docAid.pushButton.clicked.connect(self.go_homepage)
         #self.prescription.setupUi(self)
+        self.show()
+
+    @pyqtSlot()
+    def on_click(self):
+        self.charting.setupUi(self)
         self.show()
 
     def go_homepage(self):
@@ -410,6 +422,8 @@ class Mainwindow(QMainWindow):
         p = req.post(serverAddr + "/rg", json=data)
         url = p.text
         webbrowser.open(url)
+        self.charting.setupUi(self)
+        self.show()
 
 
 if __name__ == "__main__":
