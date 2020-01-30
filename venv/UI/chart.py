@@ -13,6 +13,8 @@ from PyQt5.QtWidgets import (QWidget, QPushButton,
 import requests as rq
 import urllib.request
 
+from config import chartingAddr
+
 
 class Ui_chart(object):
     def setupUi(self, MainWindow):
@@ -48,7 +50,7 @@ class Ui_chart(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         hbox = QHBoxLayout()
-        URL="http://6bf7636e.ngrok.io/docChart1"
+        URL=chartingAddr + "/docChart1"
         r=rq.get(url=URL)
         data=r.json()
         print(data)
@@ -62,7 +64,7 @@ class Ui_chart(object):
         img = img.scaled(380, 380, QtCore.Qt.KeepAspectRatio)
         print(img)
         self.label.setPixmap(QtGui.QPixmap(img))
-        URL1 = "http://6bf7636e.ngrok.io/docChart2"
+        URL1 = chartingAddr + "/docChart2"
         self.label_2.setText(_translate("MainWindow", "Image2"))
         r1 = rq.get(url=URL1)
         data1 = r1.json()
@@ -77,7 +79,7 @@ class Ui_chart(object):
         print(img)
         self.label_2.setPixmap(QtGui.QPixmap(img))
         self.label_3.setText(_translate("MainWindow", "Image3"))
-        URL2 = "http://6bf7636e.ngrok.io/docChart3"
+        URL2 = chartingAddr + "/docChart3"
         r2 = rq.get(url=URL2)
         data2 = r2.json()
         print(data2)
@@ -91,7 +93,7 @@ class Ui_chart(object):
         print(img)
         self.label_3.setPixmap(QtGui.QPixmap(img))
         self.label_4.setText(_translate("MainWindow", "Image4"))
-        URL3 = "http://6bf7636e.ngrok.io/docChart4"
+        URL3 = chartingAddr + "/docChart4"
         r3 = rq.get(url=URL3)
         data3 = r3.json()
         print(data3)

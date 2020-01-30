@@ -10,6 +10,7 @@ import requests as req
 from opening import Ui_DocAid
 from homepage import Ui_MainWindow
 from waste import Ui_Prescription
+from firebase_admin import credentials, firestore, initialize_app
 from report import Ui_Report
 from chart import Ui_chart
 import json
@@ -32,6 +33,9 @@ from config import socketIp, serverAddr
 # Audio recording parameters
 RATE = 16000
 CHUNK = int(RATE / 10)  # 100ms
+cred = credentials.Certificate('key.json')
+default_app = initialize_app(cred)
+db = firestore.client()
 
 
 class MicrophoneStream(object):
@@ -313,6 +317,7 @@ class Mainwindow(QMainWindow):
         data1 = feature_search(string)
         # data=[1,0,0,1,0,1,0,0,0,1]
         r = req.post(serverAddr + "/prediction", json={"val": data1, "patient": self.patient})
+
         # data1=[{'Dengue': [1, {'Acetaminophen': [1, 1, 1, 650, 1, 0, 1, 7, 1],
         # 'Aspirin': [2, 1, 1, 500, 0, 0, 1, 3, 1], 'Ostoshine': [5, 1, 1, 6000, 0, 1, 0, 4, 1],
         # 'Platimax': [3, 1, 0, 500, 0, 1, 1, 3, 1], 'Qubinor': [4, 1, 1, 600, 0, 1, 0, 4, 1]}]},
@@ -324,6 +329,9 @@ class Mainwindow(QMainWindow):
         print(medicines)
         symptoms = data1[1]
         print(symptoms)
+        print("RAGHAV SIR IS GENIUS")
+        db.collection("SymptomTemp").document("LatestSymptom").set({"symptoms":symptoms})
+
         i = -1
         self.prescription.setupUi(self)
         for x in symptoms:
